@@ -5,6 +5,7 @@ export default {
   theme: {
     extend: {
       colors: {},
+
       fontFamily: {
         inter: "Inter",
         logo: "Oxanium",

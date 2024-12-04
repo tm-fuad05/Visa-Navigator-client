@@ -33,7 +33,7 @@ const Navbar = () => {
 
   const navMenu = (
     <>
-      <li className="block">
+      <li>
         <NavLink to="/">Home</NavLink>
       </li>
       <li>
@@ -50,6 +50,9 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink to="/about-us">About Us</NavLink>
+      </li>
+      <li>
+        <NavLink to="/contact-us">Contact</NavLink>
       </li>
     </>
   );
@@ -77,17 +80,17 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow z-20"
             >
               {navMenu}
             </ul>
           </div>
           <a href="/" className="text-xl font-logo font-bold ml-2 lg:ml-0">
-            Visorix
+            <span className="text-blue-600 text-3xl">V</span>isorix
           </a>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">{navMenu}</ul>
+          <ul className="menu menu-horizontal space-x-1">{navMenu}</ul>
         </div>
         <div className="navbar-end space-x-3">
           {user?.email ? (

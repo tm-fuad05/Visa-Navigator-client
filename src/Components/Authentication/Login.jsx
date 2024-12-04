@@ -1,17 +1,18 @@
 import React, { useContext, useState } from "react";
 import loginImg from "../../assets/login.jpg";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 
 const Login = () => {
-  const { signInUser, setUser, user, signInWithGoogle, setLoader } =
+  const { signInUser, setUser, user, signInWithGoogle } =
     useContext(AuthContext);
   const [error, setError] = useState(null);
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -26,18 +27,18 @@ const Login = () => {
     signInUser(email, password)
       .then((result) => {
         setUser(result.user);
-        navigate("/");
+        navigate(location?.state ? location.state : "/");
       })
       .catch(() => {
         setError("Invalid email or password");
       });
   };
 
-  const signInWithGoogleRegister = () => {
+  const signInWithGoogleLogin = () => {
     signInWithGoogle()
       .then((result) => {
         setUser(result.user);
-        navigate("/");
+        navigate(location?.state ? location.state : "/");
       })
       .catch((error) => {
         setError(error);
@@ -99,7 +100,7 @@ const Login = () => {
           </form>
           <div className="form-control mt-3">
             <button
-              onClick={signInWithGoogleRegister}
+              onClick={signInWithGoogleLogin}
               className="btn bg-white border border-gray-300 hover:scale-105 duration-500 rounded-none"
             >
               <FcGoogle />

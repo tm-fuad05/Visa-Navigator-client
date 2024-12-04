@@ -7,6 +7,7 @@ import Login from "../Components/Authentication/Login";
 import Error from "../Layouts/Error";
 import AboutUs from "../Layouts/AboutUs";
 import PrivateLayouts from "../Layouts/PrivateLayouts";
+import Contact from "../Layouts/Contact";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateLayouts>
             <AboutUs></AboutUs>
+          </PrivateLayouts>
+        ),
+      },
+      {
+        path: "/contact-us",
+        element: (
+          <PrivateLayouts>
+            <Contact></Contact>
           </PrivateLayouts>
         ),
       },
