@@ -1,15 +1,17 @@
 import React, { useContext, useState } from "react";
 import loginImg from "../../assets/login.jpg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 
 const Login = () => {
-  const { signInUser, setUser, signInWithGoogle } = useContext(AuthContext);
+  const { signInUser, setUser, user, signInWithGoogle, setLoader } =
+    useContext(AuthContext);
   const [error, setError] = useState(null);
   const [show, setShow] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -24,6 +26,7 @@ const Login = () => {
     signInUser(email, password)
       .then((result) => {
         setUser(result.user);
+        navigate("/");
       })
       .catch(() => {
         setError("Invalid email or password");
@@ -34,6 +37,7 @@ const Login = () => {
     signInWithGoogle()
       .then((result) => {
         setUser(result.user);
+        navigate("/");
       })
       .catch((error) => {
         setError(error);

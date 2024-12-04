@@ -5,6 +5,8 @@ import Auth from "../Components/Authentication/Auth";
 import Register from "../Components/Authentication/Register";
 import Login from "../Components/Authentication/Login";
 import Error from "../Layouts/Error";
+import AboutUs from "../Layouts/AboutUs";
+import PrivateLayouts from "../Layouts/PrivateLayouts";
 
 const router = createBrowserRouter([
   {
@@ -14,6 +16,14 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
+      },
+      {
+        path: "/about-us",
+        element: (
+          <PrivateLayouts>
+            <AboutUs></AboutUs>
+          </PrivateLayouts>
+        ),
       },
     ],
   },

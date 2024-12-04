@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Error = () => {
   return (
-    <div className="flex flex-col-reverse lg:flex-row min-h-screen items-center w-11/12 mx-auto">
+    <div className="flex flex-col-reverse lg:flex-row min-h-screen items-center w-11/12 mx-auto mb-10 lg:mb-0">
       <div className="space-y-4">
         <h2 className="text-4xl font-bold lg:text-5xl text-center lg:text-left">
           Page Not Found

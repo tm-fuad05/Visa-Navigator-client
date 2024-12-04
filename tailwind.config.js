@@ -7,6 +7,7 @@ export default {
       colors: {},
       fontFamily: {
         inter: "Inter",
+        logo: "Oxanium",
       },
     },
   },
