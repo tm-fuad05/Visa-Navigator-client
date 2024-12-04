@@ -4,6 +4,7 @@ import Home from "../Layouts/Home";
 import Auth from "../Components/Authentication/Auth";
 import Register from "../Components/Authentication/Register";
 import Login from "../Components/Authentication/Login";
+import Error from "../Layouts/Error";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
         element: <Login></Login>,
       },
     ],
+  },
+  {
+    path: "*",
+    element: <Error></Error>,
   },
 ]);
 

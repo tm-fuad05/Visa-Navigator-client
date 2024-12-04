@@ -7,13 +7,8 @@ import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 
 const Register = () => {
-  const {
-    createUserAccount,
-    user,
-    setUser,
-    signInWithGoogle,
-    updateProfileInfo,
-  } = useContext(AuthContext);
+  const { createUserAccount, setUser, signInWithGoogle, updateProfileInfo } =
+    useContext(AuthContext);
   const [error, setError] = useState(null);
   const [show, setShow] = useState(false);
 
