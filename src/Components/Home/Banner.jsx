@@ -51,8 +51,7 @@ const Banner = () => {
               </p>
               <Link
                 to="/contact-us"
-                data-aos="zoom-in"
-                className="btn border-none bg-blue-600 hover:bg-blue-700  hover:scale-110 duration-500 rounded-md  text-white font-semibold w-fit mx-auto md:mx-0 lg:mx-0"
+                className="btn border-none bg-blue-600 hover:bg-blue-700  hover:scale-105 duration-500 rounded-md  text-white font-semibold w-fit mx-auto md:mx-0 lg:mx-0"
               >
                 <FaPhoneAlt />
                 Contact Us
@@ -85,8 +84,7 @@ const Banner = () => {
               </p>
               <Link
                 to="/contact-us"
-                data-aos="zoom-in"
-                className="btn border-none bg-red-600 hover:bg-red-700 rounded-md text-white font-semibold w-fit mx-auto md:mx-0 lg:mx-0"
+                className="btn border-none bg-blue-600 hover:bg-blue-700  hover:scale-105 duration-500 rounded-md text-white font-semibold w-fit mx-auto md:mx-0 lg:mx-0"
               >
                 <FaPhoneAlt />
                 Contact Us
@@ -119,8 +117,7 @@ const Banner = () => {
               </p>
               <Link
                 to="/contact-us"
-                data-aos="zoom-in"
-                className="btn border-none bg-red-600 hover:bg-red-700 rounded-md text-white font-semibold w-fit mx-auto md:mx-0 lg:mx-0"
+                className="btn border-none bg-blue-600 hover:bg-blue-700  hover:scale-105 duration-500 rounded-md text-white font-semibold w-fit mx-auto md:mx-0 lg:mx-0"
               >
                 <FaPhoneAlt />
                 Contact Us
