@@ -1,12 +1,14 @@
 import React from "react";
 import Banner from "../Components/Home/Banner";
 import ExtraSection1 from "../Components/Home/ExtraSection1";
+import ExtraSection2 from "../Components/Home/ExtraSection2";
 
 const Home = () => {
   return (
     <div>
       <Banner></Banner>
       <ExtraSection1></ExtraSection1>
+      <ExtraSection2></ExtraSection2>
     </div>
   );
 };
