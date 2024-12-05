@@ -8,7 +8,7 @@ import { GrUserManager } from "react-icons/gr";
 const ExtraSection1 = () => {
   return (
     <div>
-      <section className="flex flex-col lg:flex-row justify-center items-center my-10 w-10/12 mx-auto">
+      <section className="flex flex-col lg:flex-row justify-center items-center my-10 w-10/12 mx-auto gap-10">
         <div>
           <p className="text-[8px]">HOW WE HELP CLIENTS</p>
           <h2 className="text-2xl lg:text-4xl font-bold">
@@ -22,7 +22,7 @@ const ExtraSection1 = () => {
           assist you in obtaining a favorable result in your case.
         </p>
       </section>
-      <section className="my-10 bg-gray-300 relative h-[400px] lg:h-72 mt-72 mb-60 md:mb-10 lg:mt-64 ">
+      <section className="my-10 bg-gray-300 relative h-[400px] lg:h-72 mt-72 mb-64 md:mb-10 lg:mt-64 ">
         <div className=" w-10/12 mx-auto  grid grid-cols-2 lg:grid-cols-4 gap-10 absolute  left-1/2 transform -translate-x-1/2 -translate-y-52 lg:-translate-y-1/2 md:-translate-y-56 ">
           <div>
             <div className="flex flex-col gap-1 shadow-lg px-5 py-12 hover:scale-110 duration-500 hover:border-b-4 hover:border-blue-500 bg-white h-96 md:h-72">

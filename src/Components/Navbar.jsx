@@ -3,6 +3,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
+import { FaUserCircle } from "react-icons/fa";
 
 const Navbar = () => {
   const { user, signOutUser } = useContext(AuthContext);
@@ -92,7 +93,21 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal space-x-1">{navMenu}</ul>
         </div>
+
         <div className="navbar-end space-x-3">
+          <div>
+            {user && user.photoURL ? (
+              <figure className="w-9 h-9">
+                <img
+                  className="rounded-full w-full h-full  object-cover"
+                  src={user.photoURL}
+                  alt=""
+                />
+              </figure>
+            ) : (
+              <FaUserCircle className="text-4xl" />
+            )}
+          </div>
           {user?.email ? (
             <button
               onClick={handleSignOut}

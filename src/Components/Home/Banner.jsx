@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext } from "react";
 import { FaPhoneAlt } from "react-icons/fa";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -7,14 +7,12 @@ import "swiper/css/navigation";
 import slide1 from "../../assets/slide1.avif";
 import slide2 from "../../assets/slide2.jpg";
 import slide3 from "../../assets/slide3.jpg";
-import Aos from "aos";
-import "aos/dist/aos.css";
 import { Link } from "react-router-dom";
+import { Typewriter } from "react-simple-typewriter";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const Banner = () => {
-  useEffect(() => {
-    Aos.init({ duration: 1000 });
-  }, []);
+  const { user } = useContext(AuthContext);
 
   return (
     <div className=" border">
@@ -33,18 +31,28 @@ const Banner = () => {
 
             {/* Text Content */}
             <div className="absolute inset-0 flex flex-col justify-center items-start px-16 text-white gap-5">
-              <h2
-                data-aos="fade-right"
-                data-aos-easing="ease-in-sine"
-                className="lg:w-3/4 md:w-3/4 text-4xl lg:text-6xl font-bold text-center md:text-left lg:text-left"
-              >
-                Your Trusted Visa Partner
-              </h2>
-              <p
-                data-aos="fade-right"
-                data-aos-easing="ease-in-sine"
-                className="lg:w-3/4 md:w-3/4 text-md text-center md:text-left lg:text-left font-light"
-              >
+              <div className="lg:w-3/4 md:w-3/4 text-4xl lg:text-6xl font-bold text-center md:text-left lg:text-left">
+                <Typewriter
+                  words={[
+                    `${
+                      user
+                        ? `Hello, ${
+                            user && user.displayName
+                          }. Welcome to Visorix !`
+                        : "Welcome to Visorix !"
+                    }`,
+
+                    "Get Your Visa Approved Fast!",
+                    "Trusted Visa Solutions for All Your Travel Needs!",
+                  ]}
+                  loop={0}
+                  cursor
+                  typeSpeed={60}
+                  deleteSpeed={50}
+                  delaySpeed={1000}
+                />
+              </div>
+              <p className="lg:w-3/4 md:w-3/4 text-md text-center md:text-left lg:text-left font-light">
                 Navigating the visa process can be complex—trust us to simplify
                 it for you. With personalized solutions, we ensure a smooth and
                 stress-free application journey.

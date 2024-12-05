@@ -15,7 +15,7 @@ const ExtraSection2 = () => {
   }, []);
 
   return (
-    <div className="w-11/12 mx-auto mb-10 mt-72 md:mt-0">
+    <div className="w-11/12 mx-auto mb-10 mt- md:mt-0">
       <div className="flex flex-col items-center w-10/12  lg:w-7/12 mx-auto text-center mb-5">
         <p className="text-[8px]">CLIENTS TESTIMONIALS</p>
         <h2 className="text-2xl lg:text-4xl font-bold">
