@@ -8,6 +8,9 @@ import Error from "../Layouts/Error";
 import AboutUs from "../Layouts/AboutUs";
 import PrivateLayouts from "../Layouts/PrivateLayouts";
 import Contact from "../Layouts/Contact";
+import AddVisa from "../Layouts/AddVisa";
+import AllVisas from "../Layouts/AllVisas";
+import VisaDetails from "../Layouts/VisaDetails";
 
 const router = createBrowserRouter([
   {
@@ -19,20 +22,40 @@ const router = createBrowserRouter([
         element: <Home></Home>,
       },
       {
-        path: "/about-us",
+        path: "/add-visa",
         element: (
           <PrivateLayouts>
-            <AboutUs></AboutUs>
+            <AddVisa></AddVisa>
           </PrivateLayouts>
         ),
       },
       {
-        path: "/contact-us",
+        path: "/all-visas",
         element: (
           <PrivateLayouts>
-            <Contact></Contact>
+            <AllVisas />
           </PrivateLayouts>
         ),
+        loader: () => fetch("http://localhost:4000/visa"),
+      },
+      {
+        path: "/visa/:id",
+        element: (
+          <PrivateLayouts>
+            <VisaDetails />
+          </PrivateLayouts>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:4000/visa/${params.id}`),
+      },
+
+      {
+        path: "/about-us",
+        element: <AboutUs></AboutUs>,
+      },
+      {
+        path: "/contact-us",
+        element: <Contact></Contact>,
       },
     ],
   },

@@ -3,8 +3,8 @@ import { NavLink } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <div>
-      <footer className="footer bg-gray-200 text-base-content p-10 md:p-12 lg:p-16">
+    <div className="bg-gray-200">
+      <footer className="footer  text-base-content p-10 md:p-12 lg:p-16">
         <nav className="text-black">
           <div className="flex justify-between items-center gap-2 mb-5">
             <div>
@@ -82,6 +82,9 @@ const Footer = () => {
           </button>
         </nav>
       </footer>
+      <p className="text-center pb-5">
+        &copy;2024 Visorix. All Rights Reserved.
+      </p>
     </div>
   );
 };
