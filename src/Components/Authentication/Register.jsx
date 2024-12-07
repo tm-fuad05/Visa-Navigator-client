@@ -1,10 +1,11 @@
 import React, { useContext, useState } from "react";
-import registerImg from "../../assets/register.jpg";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
+import Lottie from "lottie-react";
+import register from "../../assets/register.json";
 
 const Register = () => {
   const { createUserAccount, setUser, signInWithGoogle, updateProfileInfo } =
@@ -60,7 +61,7 @@ const Register = () => {
 
   return (
     <div className="bg-gradient-to-t from-gray-100 to-gray-100">
-      <div className="w-10/12 mx-auto flex justify-center min-h-screen items-center gap-10 ">
+      <div className="w-10/12 mx-auto flex min-h-screen items-center gap-32">
         <div className="flex-grow">
           <form onSubmit={handleRegister}>
             <div className="form-control">
@@ -151,8 +152,8 @@ const Register = () => {
             </p>
           </div>
         </div>
-        <figure className="max-sm:hidden w-5/12 flex items-center">
-          <img className="h-full w-full" src={registerImg} alt="" />
+        <figure className="max-sm:hidden w-4/12 flex items-center ">
+          <Lottie className=" w-full" animationData={register} />
         </figure>
       </div>
     </div>

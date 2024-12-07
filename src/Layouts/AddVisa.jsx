@@ -75,7 +75,7 @@ const Form2 = () => {
       applicationMethod,
     };
 
-    fetch("http://localhost:4000/visa", {
+    fetch("https://assignment-10-server-five-rose.vercel.app/visa", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -100,9 +100,11 @@ const Form2 = () => {
   };
 
   return (
-    <div className="min-h-screen md:bg-blue-50 flex items-center justify-center">
+    <div className="min-h-screen md:bg-gray-100 flex flex-col items-center justify-center">
       <div className="bg-white md:shadow-lg p-8 w-full max-w-3xl md:my-20">
-        <h1 className="text-2xl font-bold text-center mb-6">Add Visa</h1>
+        <h1 className="text-3xl md:text-4xl font-bold text-center mb-10 text-[#1f2937]">
+          Add Visa
+        </h1>
         <form onSubmit={handleAddVisa} className="space-y-4">
           <div className="form-control">
             <label className=" text-sm font-medium mb-1">

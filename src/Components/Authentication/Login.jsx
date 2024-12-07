@@ -1,10 +1,12 @@
 import React, { useContext, useState } from "react";
-import loginImg from "../../assets/login.jpg";
+
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
+import Lottie from "lottie-react";
+import login from "../../assets/login.json";
 
 const Login = () => {
   const { signInUser, setUser, user, signInWithGoogle } =
@@ -119,8 +121,8 @@ const Login = () => {
             </p>
           </div>
         </div>
-        <figure className="max-sm:hidden w-5/12 flex items-center">
-          <img className="h-full w-full" src={loginImg} alt="" />
+        <figure className="max-sm:hidden w-6/12 flex items-center">
+          <Lottie className="w-full" animationData={login} />
         </figure>
       </div>
     </div>

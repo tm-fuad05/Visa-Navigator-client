@@ -36,7 +36,8 @@ const router = createBrowserRouter([
             <AllVisas />
           </PrivateLayouts>
         ),
-        loader: () => fetch("http://localhost:4000/visa"),
+        loader: () =>
+          fetch("https://assignment-10-server-five-rose.vercel.app/visa"),
       },
       {
         path: "/visa/:id",
@@ -46,7 +47,9 @@ const router = createBrowserRouter([
           </PrivateLayouts>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:4000/visa/${params.id}`),
+          fetch(
+            `https://assignment-10-server-five-rose.vercel.app/visa/${params.id}`
+          ),
       },
 
       {

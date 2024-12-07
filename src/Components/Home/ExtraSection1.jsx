@@ -1,4 +1,3 @@
-import React from "react";
 import { RxBorderSolid } from "react-icons/rx";
 
 import { PiBuildingOfficeFill } from "react-icons/pi";
@@ -11,7 +10,7 @@ const ExtraSection1 = () => {
       <section className="flex flex-col lg:flex-row justify-center items-center my-10 w-10/12 mx-auto gap-10">
         <div>
           <p className="text-[8px]">HOW WE HELP CLIENTS</p>
-          <h2 className="text-2xl lg:text-4xl font-bold">
+          <h2 className="text-2xl lg:text-4xl font-bold ">
             Level With Great Visa Serving Policies
           </h2>
           <RxBorderSolid className="text-5xl text-blue-600" />

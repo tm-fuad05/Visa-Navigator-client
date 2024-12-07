@@ -7,9 +7,9 @@ const AllVisas = () => {
 
   return (
     <div>
-      <div className="text-center h-32 lg:h-44 flex items-center justify-center bg-indigo-200 mb-20">
-        <h1 class="text-4xl  w-ful lg:text-5xl font-bold text-[#1f2937]  animate-bounce">
-          All Visas
+      <div className="text-center h-32 lg:h-44 flex items-center justify-center bg-blue-100 mb-20">
+        <h1 class="text-4xl  w-ful lg:text-5xl font-bold   animate-bounce">
+          {"<<< All Visas >>>"}
         </h1>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 w-11/12 mx-auto mb-20">
