@@ -1,32 +1,63 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import { FaFlag } from "react-icons/fa";
 import Lottie from "lottie-react";
 import empty from "../assets/empty.json";
+import { FaAngleDown } from "react-icons/fa";
 const AllVisas = () => {
   const visaData = useLoaderData();
+  const [selectedVisaType, setSelectedVisaType] = useState("");
+  const [filteredData, setFilterdData] = useState(visaData);
+
+  const handleVisaTypeChange = (e) => {
+    const visaType = e.target.value;
+    setSelectedVisaType(visaType);
+
+    if (visaType === "") {
+      setFilterdData(visaData);
+    } else {
+      const filtered = visaData.filter((data) => data.visaType === visaType);
+      setFilterdData(filtered);
+    }
+  };
 
   return (
     <div>
-      <div className="text-center h-32 lg:h-44 flex items-center justify-center bg-blue-100 mb-20">
+      <div className="text-center h-32 lg:h-44 flex items-center justify-center bg-blue-100 mb-10">
         <h1 class="text-3xl  w-ful lg:text-5xl font-bold   ">
           {"<<< All Visas >>>"}
         </h1>
       </div>
-      {visaData.length === 0 ? (
+      <div className="w-11/12 mx-auto">
+        <select
+          value={selectedVisaType}
+          onChange={handleVisaTypeChange}
+          className="select select-bordered w-5/12 md:w-2/12 mb-10"
+        >
+          <option disabled selected>
+            Visa Type
+          </option>
+
+          <option>Tourist Visa</option>
+          <option>Student Visa</option>
+          <option>Official Visa</option>
+        </select>
+      </div>
+
+      {filteredData.length === 0 ? (
         <div>
           <figure className="w-5/12 mx-auto">
             <Lottie classID="w-full" animationData={empty} />
           </figure>
           <h3 className="text-xl lg:text-4xl font-bold mb-20 w-fit mx-auto text-gray-500 mt-5">
-            No Visa Added
+            No Visa Found
           </h3>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 w-11/12 mx-auto mb-20">
-          {visaData.map((visaCard, _id) => (
+          {filteredData.map((visaCard) => (
             <div
-              key={_id}
+              key={visaCard._id}
               className="border border-gray-200  rounded-lg  transition-transform transform hover:scale-105 text-[#1f2937] flex flex-col gap-2 p-4"
             >
               <figure className=" h-64 lg:h-44">
