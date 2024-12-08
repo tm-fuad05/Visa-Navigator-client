@@ -5,6 +5,7 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
 import { FiEdit } from "react-icons/fi";
 import UpdateVisaData from "./UpdateVisaData";
+import { FiTrash } from "react-icons/fi";
 
 import Lottie from "lottie-react";
 import empty from "../assets/empty.json";
@@ -44,7 +45,7 @@ const MyAddedVisas = () => {
                 text: "Your file has been deleted.",
                 icon: "success",
               });
-              const filterVisa = myVisaData.filter((data) => data._id == !id);
+              const filterVisa = myVisaData.filter((data) => data._id !== id);
               setMyVisaData(filterVisa);
             }
           });
@@ -126,7 +127,7 @@ const MyAddedVisas = () => {
                     onClick={() => handleDelete(data._id)}
                     className="btn w-1/2 bg-red-600 hover:bg-red-700  text-white "
                   >
-                    <FiEdit className="" />
+                    <FiTrash />
                     Delete
                   </button>
                   <dialog id={data._id} className="modal">
