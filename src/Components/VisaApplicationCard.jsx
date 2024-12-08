@@ -7,8 +7,6 @@ const VisaApplicationCard = ({
   myAppliedVisas,
   setMyAppliedVisas,
 }) => {
-  console.log(myAppliedVisas);
-
   const {
     _id,
     email,
@@ -25,7 +23,6 @@ const VisaApplicationCard = ({
   } = appliedVisaCard;
 
   const handleCancelVisa = (id) => {
-    console.log(id);
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -36,7 +33,6 @@ const VisaApplicationCard = ({
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        console.log(id);
         fetch(
           `https://assignment-10-server-five-rose.vercel.app/applied-visas/${id}`,
           {

@@ -6,7 +6,6 @@ import VisaApplicationCard from "../Components/VisaApplicationCard";
 const MyVisaApplication = () => {
   const appliedVisas = useLoaderData();
   const [myAppliedVisas, setMyAppliedVisas] = useState(appliedVisas);
-  console.log(myAppliedVisas);
 
   return (
     <div className="bg-[#f3f4f6] border border-b-[#f3f4f6]">
