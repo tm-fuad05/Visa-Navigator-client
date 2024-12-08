@@ -44,10 +44,10 @@ const Navbar = () => {
         <NavLink to="/add-visa">Add Visa</NavLink>
       </li>
       <li>
-        <NavLink to="/my-added-visas">Added Visas</NavLink>
+        <NavLink to="/my-added-visas">My Added Visas</NavLink>
       </li>
       <li>
-        <NavLink to="/my-visa-application">Visa applications</NavLink>
+        <NavLink to="/my-visa-application">My Visa applications</NavLink>
       </li>
       <li>
         <NavLink to="/about-us">About Us</NavLink>
