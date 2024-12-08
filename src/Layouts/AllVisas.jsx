@@ -5,12 +5,11 @@ import Lottie from "lottie-react";
 import empty from "../assets/empty.json";
 const AllVisas = () => {
   const visaData = useLoaderData();
-  console.log(visaData);
 
   return (
     <div>
       <div className="text-center h-32 lg:h-44 flex items-center justify-center bg-blue-100 mb-20">
-        <h1 class="text-4xl  w-ful lg:text-5xl font-bold   animate-bounce">
+        <h1 class="text-3xl  w-ful lg:text-5xl font-bold   animate-bounce">
           {"<<< All Visas >>>"}
         </h1>
       </div>

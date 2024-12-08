@@ -43,7 +43,6 @@ const VisaDetails = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.insertedId) {
           document.getElementById("my_modal_1").close();
           Swal.fire({
@@ -129,9 +128,9 @@ const VisaDetails = () => {
           <div className="modal-box">
             <form
               onSubmit={handleSubmit}
-              className="grid grid-cols-1 md:grid-cols-2 gap-y-1 gap-x-5"
+              className="grid grid-cols-1 md:grid-cols-2  gap-y-1 gap-x-5"
             >
-              <div className="form-control col-span-2">
+              <div className="form-control md:col-span-2">
                 <label className="label">
                   <span className="label-text">Email</span>
                 </label>

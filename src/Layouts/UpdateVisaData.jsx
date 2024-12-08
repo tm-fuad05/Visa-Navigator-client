@@ -87,7 +87,6 @@ const UpdateVisaData = ({ data }) => {
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount > 0) {
-          document.getElementById(`${data._id}`).close();
           Swal.fire({
             position: "center",
             icon: "success",
