@@ -47,7 +47,7 @@ const Navbar = () => {
         <NavLink to="/my-added-visas">Added Visas</NavLink>
       </li>
       <li>
-        <NavLink to="/visa-application">Visa applications</NavLink>
+        <NavLink to="/my-visa-application">Visa applications</NavLink>
       </li>
       <li>
         <NavLink to="/about-us">About Us</NavLink>

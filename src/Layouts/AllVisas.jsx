@@ -9,7 +9,7 @@ const AllVisas = () => {
   return (
     <div>
       <div className="text-center h-32 lg:h-44 flex items-center justify-center bg-blue-100 mb-20">
-        <h1 class="text-3xl  w-ful lg:text-5xl font-bold   animate-bounce">
+        <h1 class="text-3xl  w-ful lg:text-5xl font-bold   ">
           {"<<< All Visas >>>"}
         </h1>
       </div>
@@ -27,7 +27,7 @@ const AllVisas = () => {
           {visaData.map((visaCard, _id) => (
             <div
               key={_id}
-              className="border border-gray-200  rounded-lg  transition-transform transform hover:scale-105 text-black flex flex-col gap-2 p-4"
+              className="border border-gray-200  rounded-lg  transition-transform transform hover:scale-105 text-[#1f2937] flex flex-col gap-2 p-4"
             >
               <figure className=" h-64 lg:h-44">
                 <img

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useLoaderData } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import { useState } from "react";
@@ -6,7 +6,10 @@ import { MdDateRange } from "react-icons/md";
 import "react-datepicker/dist/react-datepicker.css";
 import Swal from "sweetalert2/dist/sweetalert2";
 import "sweetalert2/src/sweetalert2.scss";
+import { AuthContext } from "../Provider/AuthProvider";
 const VisaDetails = () => {
+  const { user } = useContext(AuthContext);
+  const { email } = user;
   const visa = useLoaderData();
   const {
     _id,
@@ -24,7 +27,7 @@ const VisaDetails = () => {
 
   const [startDate, setStartDate] = useState(new Date());
 
-  const handleSubmit = (e) => {
+  const handleApply = (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
@@ -32,14 +35,29 @@ const VisaDetails = () => {
     const lastName = form.lastName.value;
     const date = form.date.value;
     const fee = form.fee.value;
-    const userInfo = { email, firstName, lastName, date, fee };
+    const appliedVisaInfo = {
+      email,
+      firstName,
+      lastName,
+      date,
+      fee,
+      image,
+      countryName,
+      visaType,
+      processingTime,
+      requiredDocuments,
+      description,
+      ageRestriction,
+      validity,
+      applicationMethod,
+    };
 
-    fetch("https://assignment-10-server-five-rose.vercel.app/visa_user", {
+    fetch("https://assignment-10-server-five-rose.vercel.app/applied-visas", {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(userInfo),
+      body: JSON.stringify(appliedVisaInfo),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -48,7 +66,7 @@ const VisaDetails = () => {
           Swal.fire({
             position: "center",
             icon: "success",
-            title: "Successfully Added Visa",
+            title: "Successfully Applied Visa",
             showConfirmButton: false,
             timer: 1500,
           });
@@ -61,7 +79,7 @@ const VisaDetails = () => {
   return (
     <div>
       <div className="relative bg-[#f3f4f6]">
-        <div className="text-center h-80 flex pt-16 justify-center bg-indigo-200 mb-[800px] md:mb-[850px]">
+        <div className="text-center h-80 flex pt-16 justify-center bg-blue-100 mb-[900px] md:mb-[1000px]">
           <h1 class="text-4xl lg:text-5xl font-bold text-[#1f2937]  ">
             Visa Details
           </h1>
@@ -76,7 +94,7 @@ const VisaDetails = () => {
           </figure>
           <h2 className="text-xl font-bold mt-3">{countryName}</h2>
           <div className="w-fit">
-            <p className="text-gray-800 text-sm mb-3 px-2 py-1 rounded-full bg-green-100 font-medium">
+            <p className="text-green-700 text-sm mb-3 px-2 py-1 rounded-full bg-green-100 font-medium">
               {visaType}
             </p>
           </div>
@@ -115,96 +133,100 @@ const VisaDetails = () => {
           <div className="my-2">
             <p>{description}</p>
           </div>
-        </div>
-      </div>
-      <div className="mb-10 w-fit mx-auto border-2 border-blue-400 rounded-lg p-1 hover:scale-105">
-        <button
-          onClick={() => document.getElementById("my_modal_1").showModal()}
-          className="btn bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-indigo-500 hover:to-blue-500  text-white"
-        >
-          Apply for the visa
-        </button>
-        <dialog id="my_modal_1" className="modal">
-          <div className="modal-box">
-            <form
-              onSubmit={handleSubmit}
-              className="grid grid-cols-1 md:grid-cols-2  gap-y-1 gap-x-5"
+          <div className="mb-5 w-fit mx-auto border-2 border-blue-400 rounded-lg p-0.5 hover:scale-105">
+            <button
+              onClick={() => document.getElementById("my_modal_1").showModal()}
+              className="btn btn-sm md:btn-md bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-indigo-500 hover:to-blue-500  text-white"
             >
-              <div className="form-control md:col-span-2">
-                <label className="label">
-                  <span className="label-text">Email</span>
-                </label>
-                <input
-                  type="email"
-                  placeholder="email"
-                  name="email"
-                  className="input input-bordered cla"
-                  required
-                />
+              Apply for the visa
+            </button>
+            <dialog id="my_modal_1" className="modal">
+              <div className="modal-box">
+                <form
+                  onSubmit={handleApply}
+                  className="grid grid-cols-1 lg:grid-cols-2  gap-y-1 gap-x-5"
+                >
+                  <div className="form-control lg:col-span-2">
+                    <label className="label">
+                      <span className="label-text">Email</span>
+                    </label>
+                    <input
+                      type="email"
+                      placeholder="email"
+                      defaultValue={email}
+                      disabled
+                      name="email"
+                      className="input input-bordered cla"
+                      required
+                    />
+                  </div>
+                  <div className="form-control">
+                    <label className="label">
+                      <span className="label-text">First name</span>
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="First name"
+                      name="firstName"
+                      className="input input-bordered"
+                      required
+                    />
+                  </div>
+                  <div className="form-control">
+                    <label className="label">
+                      <span className="label-text">Last name</span>
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Last name"
+                      name="lastName"
+                      className="input input-bordered"
+                      required
+                    />
+                  </div>
+                  <div className="form-control relative">
+                    <label className="label">
+                      <span className="label-text">Date</span>
+                    </label>
+                    <DatePicker
+                      name="date"
+                      showIcon
+                      icon=""
+                      className="input w-full border border-gray-300"
+                      selected={startDate}
+                      onChange={(date) => setStartDate(date)}
+                    ></DatePicker>
+                    <MdDateRange className="absolute bottom-4 left-2 text-gray-500" />
+                  </div>
+                  <div className="form-control">
+                    <label className="label">
+                      <span className="label-text">Fee</span>
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Fee"
+                      name="fee"
+                      defaultValue={fee}
+                      disabled
+                      className="input input-bordered"
+                      required
+                    />
+                  </div>
+                  <div className="form-control mt-6 lg:col-span-2">
+                    <button className=" btn bg-gradient-to-r from-blue-500 to-indigo-400 text-white  hover:bg-gradient-to-r hover:from-indigo-400 hover:to-blue-500 hover:scale-105">
+                      Apply
+                    </button>
+                  </div>
+                </form>
+                <div className="modal-action">
+                  <form method="dialog">
+                    <button className="btn">Close</button>
+                  </form>
+                </div>
               </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">First name</span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="First name"
-                  name="firstName"
-                  className="input input-bordered"
-                  required
-                />
-              </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Last name</span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="Last name"
-                  name="lastName"
-                  className="input input-bordered"
-                  required
-                />
-              </div>
-              <div className="form-control relative">
-                <label className="label">
-                  <span className="label-text">Date</span>
-                </label>
-                <DatePicker
-                  name="date"
-                  showIcon
-                  icon=""
-                  className="input w-full border border-gray-300"
-                  selected={startDate}
-                  onChange={(date) => setStartDate(date)}
-                ></DatePicker>
-                <MdDateRange className="absolute bottom-4 left-2 text-gray-500" />
-              </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Fee</span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="Fee"
-                  name="fee"
-                  className="input input-bordered"
-                  required
-                />
-              </div>
-              <div className="form-control mt-6 col-span-2">
-                <button className=" btn bg-gradient-to-r from-blue-500 to-indigo-400 text-white  hover:bg-gradient-to-r hover:from-indigo-400 hover:to-blue-500 hover:scale-105">
-                  Apply
-                </button>
-              </div>
-            </form>
-            <div className="modal-action">
-              <form method="dialog">
-                <button className="btn">Close</button>
-              </form>
-            </div>
+            </dialog>
           </div>
-        </dialog>
+        </div>
       </div>
     </div>
   );
