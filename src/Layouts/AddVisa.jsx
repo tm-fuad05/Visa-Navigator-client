@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Swal from "sweetalert2/dist/sweetalert2";
 import "sweetalert2/src/sweetalert2.scss";
+import { AuthContext } from "../Provider/AuthProvider";
 const Form2 = () => {
   const [error, setError] = useState("");
+  const { user } = useContext(AuthContext);
+  const { email } = user;
 
   const [formData, setFormData] = useState({
     countryImage: "",
@@ -73,6 +76,7 @@ const Form2 = () => {
       fee,
       validity,
       applicationMethod,
+      email,
     };
 
     fetch("https://assignment-10-server-five-rose.vercel.app/visa", {
@@ -102,7 +106,7 @@ const Form2 = () => {
   return (
     <div className="min-h-screen md:bg-gray-100 flex flex-col items-center justify-center">
       <div className="bg-white md:shadow-lg p-8 w-full max-w-3xl md:my-20">
-        <h1 className="text-3xl md:text-4xl font-bold text-center mb-10 text-[#1f2937]">
+        <h1 className="text-3xl md:text-4xl font-bold text-center mb-10 ">
           Add Visa
         </h1>
         <form onSubmit={handleAddVisa} className="space-y-4">
@@ -209,7 +213,6 @@ const Form2 = () => {
               onChange={handleChange}
               placeholder="Enter age restriction"
               className="input input-bordered rounded-none focus:outline-none "
-              required
             />
           </div>
 

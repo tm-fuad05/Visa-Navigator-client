@@ -11,6 +11,7 @@ import Contact from "../Layouts/Contact";
 import AddVisa from "../Layouts/AddVisa";
 import AllVisas from "../Layouts/AllVisas";
 import VisaDetails from "../Layouts/VisaDetails";
+import MyAddedVisas from "../Layouts/MyAddedVisas";
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,14 @@ const router = createBrowserRouter([
           fetch(
             `https://assignment-10-server-five-rose.vercel.app/visa/${params.id}`
           ),
+      },
+      {
+        path: "/my-added-visas",
+        element: (
+          <PrivateLayouts>
+            <MyAddedVisas></MyAddedVisas>
+          </PrivateLayouts>
+        ),
       },
 
       {

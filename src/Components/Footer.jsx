@@ -77,7 +77,7 @@ const Footer = () => {
             placeholder="Email"
           />
 
-          <button className="btn border-none bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-indigo-500 hover:to-blue-500 hover:scale-105 text-white  w-full">
+          <button className="btn border-none bg-gradient-to-r from-red-500 to-orange-500 hover:from-orange-500 hover:to-red-500 hover:scale-105 text-white  w-full">
             Subscribe
           </button>
         </nav>
