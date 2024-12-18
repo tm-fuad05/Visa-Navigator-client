@@ -52,6 +52,9 @@ const MyAddedVisas = () => {
       }
     });
   };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
 
   return (
     <div>
@@ -138,6 +141,7 @@ const MyAddedVisas = () => {
                           document.getElementById(`${data._id}`).close()
                         }
                       ></UpdateVisaData>
+
                       <div className="modal-action">
                         <form method="dialog">
                           <button className="btn">Close</button>

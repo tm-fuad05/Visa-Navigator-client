@@ -137,13 +137,12 @@ const UpdateVisaData = ({ data, onClose }) => {
           <label className=" text-sm font-medium mb-1">Visa Type:</label>
           <select
             name="visaType"
-            // value={formData.visaType}
-
+            value={data.visaType}
             onChange={handleChange}
             className="w-full p-3 border rounded-none focus:outline-none "
             required
           >
-            <option>{data.visaType}</option>
+            <option disabled>Select Visa Type</option>
             {visaTypes.map((type, index) => (
               <option key={index} value={type}>
                 {type}
