@@ -140,12 +140,13 @@ const Form2 = () => {
             <label className=" text-sm font-medium mb-1">Visa Type:</label>
             <select
               name="visaType"
-              value={formData.visaType}
               onChange={handleChange}
               className="w-full p-3 border rounded-none focus:outline-none "
               required
             >
-              <option value="">Select Visa Type</option>
+              <option selected disabled>
+                Select Visa Type
+              </option>
               {visaTypes.map((type, index) => (
                 <option key={index} value={type}>
                   {type}
@@ -195,7 +196,7 @@ const Form2 = () => {
               value={formData.description}
               onChange={handleChange}
               placeholder="Enter description"
-              className="input input-bordered rounded-none focus:outline-none "
+              className="input input-bordered rounded-none focus:outline-none h-24 "
               required
             ></textarea>
           </div>

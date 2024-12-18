@@ -132,7 +132,12 @@ const MyAddedVisas = () => {
                   </button>
                   <dialog id={data._id} className="modal">
                     <div className="modal-box">
-                      <UpdateVisaData data={data}></UpdateVisaData>
+                      <UpdateVisaData
+                        data={data}
+                        onClose={() =>
+                          document.getElementById(`${data._id}`).close()
+                        }
+                      ></UpdateVisaData>
                       <div className="modal-action">
                         <form method="dialog">
                           <button className="btn">Close</button>

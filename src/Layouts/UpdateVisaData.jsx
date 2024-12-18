@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2/dist/sweetalert2";
 import "sweetalert2/src/sweetalert2.scss";
-const UpdateVisaData = ({ data }) => {
+const UpdateVisaData = ({ data, onClose }) => {
   const [error, setError] = useState(null);
   const [formData, setFormData] = useState({
     countryImage: "",
@@ -87,6 +87,7 @@ const UpdateVisaData = ({ data }) => {
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount > 0) {
+          onClose();
           Swal.fire({
             position: "center",
             icon: "success",

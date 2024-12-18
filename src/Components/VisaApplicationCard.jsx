@@ -30,7 +30,7 @@ const VisaApplicationCard = ({
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonText: "Yes, cancel it!",
     }).then((result) => {
       if (result.isConfirmed) {
         fetch(
@@ -43,8 +43,8 @@ const VisaApplicationCard = ({
           .then((data) => {
             if (data.deletedCount > 0) {
               Swal.fire({
-                title: "Deleted!",
-                text: "Your visa application has been deleted.",
+                title: "Canceled!",
+                text: "Your visa application has been canceled.",
                 icon: "success",
               });
               const remaining = myAppliedVisas.filter(

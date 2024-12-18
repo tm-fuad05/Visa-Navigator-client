@@ -7,15 +7,12 @@ const MyVisaApplication = () => {
   const appliedVisas = useLoaderData();
   const [myAppliedVisas, setMyAppliedVisas] = useState(appliedVisas);
 
-  const [searchTerm, setSearchTerm] = useState("");
-
   const handleSearchChange = (e) => {
     const inputValue = e.target.value;
-
+    console.log(inputValue);
     if (inputValue.length === 0) {
       setMyAppliedVisas(appliedVisas);
     } else {
-      setSearchTerm(inputValue);
       const filtered = myAppliedVisas.filter((country) =>
         country.countryName.toLowerCase().includes(inputValue.toLowerCase())
       );
@@ -32,7 +29,6 @@ const MyVisaApplication = () => {
       </div>
       <label className="input input-bordered flex items-center gap-2 mb-16 w-8/12 md:w-5/12 lg:w-4/12 mx-auto">
         <input
-          value={searchTerm}
           onChange={handleSearchChange}
           type="text"
           className="grow"

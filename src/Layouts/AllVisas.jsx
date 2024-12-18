@@ -6,14 +6,14 @@ import empty from "../assets/empty.json";
 import { FaAngleDown } from "react-icons/fa";
 const AllVisas = () => {
   const visaData = useLoaderData();
-  const [selectedVisaType, setSelectedVisaType] = useState("");
+  const [selectedVisaType, setSelectedVisaType] = useState("All Visa");
   const [filteredData, setFilterdData] = useState(visaData);
 
   const handleVisaTypeChange = (e) => {
     const visaType = e.target.value;
     setSelectedVisaType(visaType);
 
-    if (visaType === "") {
+    if (visaType === "All Visas") {
       setFilterdData(visaData);
     } else {
       const filtered = visaData.filter((data) => data.visaType === visaType);
@@ -34,9 +34,7 @@ const AllVisas = () => {
           onChange={handleVisaTypeChange}
           className="select select-bordered w-5/12 md:w-2/12 mb-10"
         >
-          <option disabled selected>
-            Visa Type
-          </option>
+          <option>All Visas</option>
 
           <option>Tourist Visa</option>
           <option>Student Visa</option>

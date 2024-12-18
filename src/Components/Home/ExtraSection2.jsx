@@ -6,7 +6,6 @@ import Rating from "react-rating";
 
 const ExtraSection2 = () => {
   const [reviews, setReviews] = useState([]);
-  
 
   useEffect(() => {
     fetch("../reviews.json")

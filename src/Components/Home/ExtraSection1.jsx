@@ -24,9 +24,9 @@ const ExtraSection1 = () => {
       <section className="my-10 bg-gray-300 relative h-[400px] lg:h-72 mt-72 mb-64 md:mb-10 lg:mt-64 ">
         <div className=" w-10/12 mx-auto  grid grid-cols-2 lg:grid-cols-4 gap-10 absolute  left-1/2 transform -translate-x-1/2 -translate-y-52 lg:-translate-y-1/2 md:-translate-y-56 ">
           <div>
-            <div className="flex flex-col gap-1 shadow-lg px-5 py-12 hover:scale-110 duration-500 hover:border-b-4 hover:border-blue-500 bg-white h-96 md:h-72">
+            <div className="flex flex-col gap-1 shadow-lg px-5 py-12 hover:scale-110 duration-500 hover:border-b-4 group hover:border-blue-500 bg-white h-96 md:h-72 ">
               <div className="w-fit mx-auto">
-                <PiBuildingOfficeFill className="text-6xl text-indigo-500 hover:text-blue-500 duration-500 " />
+                <PiBuildingOfficeFill className="text-6xl text-indigo-500  duration-500 group-hover:text-blue-500" />
               </div>
               <p className="text-[10px] text-gray-500 text-center">VISA TYPE</p>
               <h5 className="text-lg text-center font-semibold ">
@@ -39,9 +39,9 @@ const ExtraSection1 = () => {
             </div>
           </div>
           <div>
-            <div className="flex flex-col gap-1 shadow-lg px-5 py-12 hover:scale-110 duration-500 hover:border-b-4 hover:border-blue-500 bg-white h-96 md:h-72">
+            <div className="flex flex-col gap-1 shadow-lg px-5 py-12 hover:scale-110 duration-500 group hover:border-b-4  hover:border-blue-500 bg-white h-96 md:h-72">
               <div className="w-fit mx-auto">
-                <IoNewspaperOutline className="text-6xl text-indigo-500 hover:text-blue-500 duration-500 " />
+                <IoNewspaperOutline className="text-6xl text-indigo-500 group-hover:text-blue-500 duration-500 " />
               </div>
               <p className="text-[10px] text-gray-500 text-center">VISA TYPE</p>
               <h5 className="text-lg text-center font-semibold ">
@@ -54,9 +54,9 @@ const ExtraSection1 = () => {
             </div>
           </div>
           <div>
-            <div className="flex flex-col gap-1 shadow-lg px-5 py-12 hover:scale-110 duration-500 hover:border-b-4 hover:border-blue-500 bg-white h-96 md:h-72">
+            <div className="flex flex-col gap-1 shadow-lg px-5 py-12 hover:scale-110 duration-500 hover:border-b-4 group hover:border-blue-500 bg-white h-96 md:h-72">
               <div className="w-fit mx-auto">
-                <GiCommercialAirplane className="text-6xl text-indigo-500 hover:text-blue-500 duration-500 " />
+                <GiCommercialAirplane className="text-6xl text-indigo-500 group-hover:text-blue-500 duration-500 " />
               </div>
               <p className="text-[10px] text-gray-500 text-center">VISA TYPE</p>
               <h5 className="text-lg text-center font-semibold ">
@@ -69,9 +69,9 @@ const ExtraSection1 = () => {
             </div>
           </div>
           <div>
-            <div className="flex flex-col gap-1 shadow-lg px-5 py-12 hover:scale-110 duration-500 hover:border-b-4 hover:border-blue-500 bg-white h-96 md:h-72">
+            <div className="flex flex-col gap-1 shadow-lg px-5 py-12 hover:scale-110 duration-500 hover:border-b-4 group hover:border-blue-500 bg-white h-96 md:h-72">
               <div className="w-fit mx-auto">
-                <GrUserManager className="text-6xl text-indigo-500 hover:text-blue-500 duration-500 " />
+                <GrUserManager className="text-6xl text-indigo-500 group-hover:text-blue-500 duration-500 " />
               </div>
               <p className="text-[10px] text-gray-500 text-center">VISA TYPE</p>
               <h5 className="text-lg text-center font-semibold ">
