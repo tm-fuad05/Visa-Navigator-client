@@ -175,7 +175,7 @@ const UpdateVisaData = ({ data, onClose }) => {
                 type="checkbox"
                 name="requiredDocuments"
                 value={doc}
-                checked={formData.requiredDocuments.includes(doc)}
+                defaultChecked={data.requiredDocuments.includes(doc)}
                 onChange={handleChange}
               />
               <span>{doc}</span>
