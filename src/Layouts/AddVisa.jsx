@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import Swal from "sweetalert2/dist/sweetalert2";
 import "sweetalert2/src/sweetalert2.scss";
 import { AuthContext } from "../Provider/AuthProvider";
-const Form2 = () => {
+const AddVisa = () => {
   const [error, setError] = useState("");
   const { user } = useContext(AuthContext);
   const { email } = user;
@@ -268,4 +268,4 @@ const Form2 = () => {
   );
 };
 
-export default Form2;
+export default AddVisa;
