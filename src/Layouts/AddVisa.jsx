@@ -104,9 +104,7 @@ const AddVisa = () => {
   return (
     <div className="min-h-screen md:bg-gray-100 flex flex-col items-center justify-center">
       <div className="bg-white md:shadow-lg p-8 w-full max-w-3xl md:my-20">
-        <h1 className="text-3xl md:text-4xl font-bold text-center mb-10 ">
-          Add Visa
-        </h1>
+        <h2 className="text-3xl font-bold text-center mb-10 ">Add Visa</h2>
         <form onSubmit={handleAddVisa} className="space-y-4">
           <div className="form-control">
             <label className=" text-sm font-medium mb-1">

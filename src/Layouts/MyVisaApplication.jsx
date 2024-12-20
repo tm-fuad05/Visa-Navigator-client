@@ -31,10 +31,8 @@ const MyVisaApplication = () => {
 
   return (
     <div className="bg-[#f3f4f6] border border-b-[#f3f4f6]">
-      <div className="text-center h-32 lg:h-44 flex items-center justify-center bg-blue-100 mb-10">
-        <h1 class="text-3xl lg:text-5xl font-bold">
-          {"<< My Visa Application >>"}
-        </h1>
+      <div className="text-center h-24 lg:h-28 flex items-center justify-center bg-blue-100 mb-10">
+        <h2 class="text-3xl font-bold">My Visa Application</h2>
       </div>
       <label className="input input-bordered flex items-center gap-2 mb-16 w-8/12 md:w-5/12 lg:w-4/12 mx-auto">
         <input

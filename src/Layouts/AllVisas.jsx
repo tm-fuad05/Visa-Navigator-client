@@ -23,10 +23,8 @@ const AllVisas = () => {
 
   return (
     <div>
-      <div className="text-center h-32 lg:h-44 flex items-center justify-center bg-blue-100 mb-10">
-        <h1 class="text-3xl boxShadow lg:text-5xl font-bold   ">
-          {"<<< All Visas >>>"}
-        </h1>
+      <div className="text-center h-24 lg:h-28 flex items-center justify-center bg-blue-100 mb-10">
+        <h2 class="text-3xl font-bold">All Visas</h2>
       </div>
       <div className="w-11/12 mx-auto">
         <select

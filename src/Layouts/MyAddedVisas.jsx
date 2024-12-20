@@ -58,10 +58,8 @@ const MyAddedVisas = () => {
 
   return (
     <div>
-      <div className="text-center h-32 lg:h-44 flex items-center justify-center bg-blue-100 mb-20">
-        <h1 class="text-3xl lg:text-5xl font-bold   ">
-          {"<<< My Added Visas >>>"}
-        </h1>
+      <div className="text-center h-24 lg:h-28 flex items-center justify-center bg-blue-100 mb-20">
+        <h2 class="text-3xl font-bold">My Added Visa</h2>
       </div>
 
       {myVisaData.length === 0 ? (
