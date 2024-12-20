@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { FaRegEye } from "react-icons/fa";
@@ -12,6 +12,7 @@ const Register = () => {
     useContext(AuthContext);
   const [error, setError] = useState(null);
   const [show, setShow] = useState(false);
+  const navigate = useNavigate();
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -20,7 +21,6 @@ const Register = () => {
     const photo = form.photo.value;
     const email = form.email.value;
     const password = form.password.value;
-    const user = { name, photo, email, password };
 
     setError("");
 
@@ -39,6 +39,7 @@ const Register = () => {
         updateProfileInfo({ displayName: name, photoURL: photo })
           .then(() => {
             setUser(result.user);
+            navigate("/");
           })
           .catch((error) => {
             setError(error);
@@ -53,6 +54,7 @@ const Register = () => {
     signInWithGoogle()
       .then((result) => {
         setUser(result.user);
+        navigate("/");
       })
       .catch((error) => {
         setError(error);

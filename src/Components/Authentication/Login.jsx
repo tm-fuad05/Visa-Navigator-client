@@ -7,10 +7,10 @@ import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 import Lottie from "lottie-react";
 import login from "../../assets/login.json";
+import axios from "axios";
 
 const Login = () => {
-  const { signInUser, setUser, user, signInWithGoogle } =
-    useContext(AuthContext);
+  const { signInUser, setUser, signInWithGoogle } = useContext(AuthContext);
   const [error, setError] = useState(null);
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
@@ -22,12 +22,15 @@ const Login = () => {
 
     const email = form.email.value;
     const password = form.password.value;
-    const user = { email, password };
-    
+
     setError("");
 
     signInUser(email, password)
       .then((result) => {
+        const user = { email: email };
+        axios
+          .post("http://localhost:4000/jwt", user)
+          .then((data) => console.log(data));
         setUser(result.user);
         navigate(location?.state ? location.state : "/");
       })

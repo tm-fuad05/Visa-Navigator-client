@@ -1,17 +1,26 @@
 import Lottie from "lottie-react";
-import React, { useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+
 import empty from "../assets/empty.json";
 import VisaApplicationCard from "../Components/VisaApplicationCard";
+import { AuthContext } from "../Provider/AuthProvider";
 const MyVisaApplication = () => {
-  const appliedVisas = useLoaderData();
-  const [myAppliedVisas, setMyAppliedVisas] = useState(appliedVisas);
+  const { user } = useContext(AuthContext);
+  const [myAppliedVisas, setMyAppliedVisas] = useState([]);
+
+  useEffect(() => {
+    fetch(
+      `https://assignment-10-server-five-rose.vercel.app/applied-visas?email=${user.email}`
+    )
+      .then((res) => res.json())
+      .then((data) => setMyAppliedVisas(data));
+  }, []);
 
   const handleSearchChange = (e) => {
     const inputValue = e.target.value;
     console.log(inputValue);
     if (inputValue.length === 0) {
-      setMyAppliedVisas(appliedVisas);
+      setMyAppliedVisas(myAppliedVisas);
     } else {
       const filtered = myAppliedVisas.filter((country) =>
         country.countryName.toLowerCase().includes(inputValue.toLowerCase())

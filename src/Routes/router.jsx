@@ -68,10 +68,6 @@ const router = createBrowserRouter([
             <MyVisaApplication />
           </PrivateLayouts>
         ),
-        loader: () =>
-          fetch(
-            "https://assignment-10-server-five-rose.vercel.app/applied-visas"
-          ),
       },
 
       {
