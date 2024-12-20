@@ -5,3 +5,7 @@
 footer #nav a.active {
   text-decoration: underline;
 }
+
+body {
+  overflow-x: hidden;
+}
