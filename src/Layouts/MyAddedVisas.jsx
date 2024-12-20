@@ -59,7 +59,7 @@ const MyAddedVisas = () => {
   return (
     <div>
       <div className="text-center h-32 lg:h-44 flex items-center justify-center bg-blue-100 mb-20">
-        <h1 class="text-3xl  w-ful lg:text-5xl font-bold   ">
+        <h1 class="text-3xl lg:text-5xl font-bold   ">
           {"<<< My Added Visas >>>"}
         </h1>
       </div>

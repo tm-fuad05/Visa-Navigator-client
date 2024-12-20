@@ -32,7 +32,7 @@ const MyVisaApplication = () => {
   return (
     <div className="bg-[#f3f4f6] border border-b-[#f3f4f6]">
       <div className="text-center h-32 lg:h-44 flex items-center justify-center bg-blue-100 mb-10">
-        <h1 class="text-3xl  w-ful lg:text-5xl font-bold   ">
+        <h1 class="text-3xl lg:text-5xl font-bold">
           {"<< My Visa Application >>"}
         </h1>
       </div>

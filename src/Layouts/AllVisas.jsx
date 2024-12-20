@@ -24,7 +24,7 @@ const AllVisas = () => {
   return (
     <div>
       <div className="text-center h-32 lg:h-44 flex items-center justify-center bg-blue-100 mb-10">
-        <h1 class="text-3xl  w-ful lg:text-5xl font-bold   ">
+        <h1 class="text-3xl boxShadow lg:text-5xl font-bold   ">
           {"<<< All Visas >>>"}
         </h1>
       </div>
