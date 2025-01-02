@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import Swal from "sweetalert2/dist/sweetalert2";
 import "sweetalert2/src/sweetalert2.scss";
@@ -74,19 +75,14 @@ const UpdateVisaData = ({ data, onClose }) => {
       applicationMethod,
     };
 
-    fetch(
-      `https://assignment-10-server-five-rose.vercel.app/visa/${data._id}`,
-      {
-        method: "PUT",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(updatedVisaData),
-      }
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.modifiedCount > 0) {
+    axios
+      .put(
+        `https://assignment-10-server-five-rose.vercel.app/visa/${data._id}`,
+        updatedVisaData
+      )
+
+      .then((res) => {
+        if (res.data.modifiedCount > 0) {
           onClose();
           Swal.fire({
             position: "center",

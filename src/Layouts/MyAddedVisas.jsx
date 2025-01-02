@@ -9,6 +9,7 @@ import { FiTrash } from "react-icons/fi";
 
 import Lottie from "lottie-react";
 import empty from "../assets/empty.json";
+import axios from "axios";
 const MyAddedVisas = () => {
   const { user } = useContext(AuthContext);
   const { email } = user;
@@ -16,11 +17,14 @@ const MyAddedVisas = () => {
   const [myVisaData, setMyVisaData] = useState([]);
 
   useEffect(() => {
-    fetch(
-      `https://assignment-10-server-five-rose.vercel.app/my-added-visas?email=${email}`
-    )
-      .then((res) => res.json())
-      .then((data) => setMyVisaData(data));
+    axios
+      .get(
+        `https://assignment-10-server-five-rose.vercel.app/my-added-visas?email=${email}`,
+        {
+          withCredentials: true,
+        }
+      )
+      .then((res) => console.log(setMyVisaData(res.data)));
   }, []);
 
   const handleDelete = (id) => {
@@ -34,12 +38,13 @@ const MyAddedVisas = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://assignment-10-server-five-rose.vercel.app/visa/${id}`, {
-          method: "DELETE",
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.deletedCount > 0) {
+        axios
+          .delete(
+            `https://assignment-10-server-five-rose.vercel.app/visa/${id}`
+          )
+
+          .then((res) => {
+            if (res.data.deletedCount > 0) {
               Swal.fire({
                 title: "Deleted!",
                 text: "Your file has been deleted.",

@@ -1,3 +1,4 @@
+import axios from "axios";
 import React from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import Swal from "sweetalert2/dist/sweetalert2";
@@ -33,15 +34,12 @@ const VisaApplicationCard = ({
       confirmButtonText: "Yes, cancel it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(
-          `https://assignment-10-server-five-rose.vercel.app/applied-visas/${id}`,
-          {
-            method: "DELETE",
-          }
-        )
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.deletedCount > 0) {
+        axios
+          .delete(
+            `https://assignment-10-server-five-rose.vercel.app/applied-visas/${id}`
+          )
+          .then((res) => {
+            if (res.data.deletedCount > 0) {
               Swal.fire({
                 title: "Canceled!",
                 text: "Your visa application has been canceled.",

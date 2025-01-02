@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import Swal from "sweetalert2/dist/sweetalert2";
 import "sweetalert2/src/sweetalert2.scss";
 import { AuthContext } from "../Provider/AuthProvider";
+import axios from "axios";
 const AddVisa = () => {
   const [error, setError] = useState("");
   const { user } = useContext(AuthContext);
@@ -79,16 +80,10 @@ const AddVisa = () => {
       email,
     };
 
-    fetch("https://assignment-10-server-five-rose.vercel.app/visa", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(visaData),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.insertedId) {
+    axios
+      .post("https://assignment-10-server-five-rose.vercel.app/visa", visaData)
+      .then((res) => {
+        if (res.data.insertedId) {
           Swal.fire({
             position: "center",
             icon: "success",

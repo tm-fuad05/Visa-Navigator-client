@@ -4,30 +4,24 @@ import React, { useContext, useEffect, useState } from "react";
 import empty from "../assets/empty.json";
 import VisaApplicationCard from "../Components/VisaApplicationCard";
 import { AuthContext } from "../Provider/AuthProvider";
+import axios from "axios";
 const MyVisaApplication = () => {
   const { user } = useContext(AuthContext);
   const [myAppliedVisas, setMyAppliedVisas] = useState([]);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
-    fetch(
-      `https://assignment-10-server-five-rose.vercel.app/applied-visas?email=${user.email}`
-    )
-      .then((res) => res.json())
-      .then((data) => setMyAppliedVisas(data));
-  }, []);
-
-  const handleSearchChange = (e) => {
-    const inputValue = e.target.value;
-    console.log(inputValue);
-    if (inputValue.length === 0) {
-      setMyAppliedVisas(myAppliedVisas);
-    } else {
-      const filtered = myAppliedVisas.filter((country) =>
-        country.countryName.toLowerCase().includes(inputValue.toLowerCase())
+    const fetchMyAppliedVisas = async () => {
+      const { data } = await axios.get(
+        `https://assignment-10-server-five-rose.vercel.app/applied-visas?email=${user.email}&search=${search}`,
+        {
+          withCredentials: true,
+        }
       );
-      setMyAppliedVisas(filtered);
-    }
-  };
+      setMyAppliedVisas(data);
+    };
+    fetchMyAppliedVisas();
+  }, [user.email, search]);
 
   return (
     <div className="bg-[#f3f4f6] border border-b-[#f3f4f6]">
@@ -36,7 +30,7 @@ const MyVisaApplication = () => {
       </div>
       <label className="input input-bordered flex items-center gap-2 mb-16 w-8/12 md:w-5/12 lg:w-4/12 mx-auto">
         <input
-          onChange={handleSearchChange}
+          onChange={(e) => setSearch(e.target.value)}
           type="text"
           className="grow"
           placeholder="Search"

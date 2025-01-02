@@ -1,25 +1,22 @@
-import React, { useState } from "react";
-import { Link, useLoaderData } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { FaFlag } from "react-icons/fa";
 import Lottie from "lottie-react";
 import empty from "../assets/empty.json";
-import { FaAngleDown } from "react-icons/fa";
+import axios from "axios";
 const AllVisas = () => {
-  const visaData = useLoaderData();
-  const [selectedVisaType, setSelectedVisaType] = useState("All Visa");
-  const [filteredData, setFilterdData] = useState(visaData);
+  const [allVisaData, setAllVisaData] = useState([]);
+  const [filter, setFilter] = useState("");
 
-  const handleVisaTypeChange = (e) => {
-    const visaType = e.target.value;
-    setSelectedVisaType(visaType);
-
-    if (visaType === "All Visas") {
-      setFilterdData(visaData);
-    } else {
-      const filtered = visaData.filter((data) => data.visaType === visaType);
-      setFilterdData(filtered);
-    }
-  };
+  useEffect(() => {
+    const fetchAllVIsaData = async () => {
+      const { data } = await axios.get(
+        `https://assignment-10-server-five-rose.vercel.app/visa?filter=${filter}`
+      );
+      setAllVisaData(data);
+    };
+    fetchAllVIsaData();
+  }, [filter]);
 
   return (
     <div>
@@ -28,11 +25,12 @@ const AllVisas = () => {
       </div>
       <div className="w-11/12 mx-auto">
         <select
-          value={selectedVisaType}
-          onChange={handleVisaTypeChange}
+          onChange={(e) => setFilter(e.target.value)}
           className="select select-bordered w-5/12 md:w-2/12 mb-10"
         >
-          <option>All Visas</option>
+          <option selected disabled>
+            Visa Type
+          </option>
 
           <option>Tourist Visa</option>
           <option>Student Visa</option>
@@ -40,7 +38,7 @@ const AllVisas = () => {
         </select>
       </div>
 
-      {filteredData.length === 0 ? (
+      {allVisaData.length === 0 ? (
         <div>
           <figure className="w-5/12 mx-auto">
             <Lottie classID="w-full" animationData={empty} />
@@ -51,7 +49,7 @@ const AllVisas = () => {
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 w-11/12 mx-auto mb-20">
-          {filteredData.map((visaCard) => (
+          {allVisaData.map((visaCard) => (
             <div
               key={visaCard._id}
               className="border border-gray-200  rounded-lg  transition-transform transform hover:scale-105 text-[#1f2937] flex flex-col gap-2 p-4"

@@ -38,8 +38,6 @@ const router = createBrowserRouter([
             <AllVisas />
           </PrivateLayouts>
         ),
-        loader: () =>
-          fetch("https://assignment-10-server-five-rose.vercel.app/visa"),
       },
       {
         path: "/visa/:id",

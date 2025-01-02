@@ -7,12 +7,12 @@ import "react-datepicker/dist/react-datepicker.css";
 import Swal from "sweetalert2/dist/sweetalert2";
 import "sweetalert2/src/sweetalert2.scss";
 import { AuthContext } from "../Provider/AuthProvider";
+import axios from "axios";
 const VisaDetails = () => {
   const { user } = useContext(AuthContext);
   const { email } = user;
   const visa = useLoaderData();
   const {
-    _id,
     image,
     countryName,
     visaType,
@@ -52,16 +52,13 @@ const VisaDetails = () => {
       applicationMethod,
     };
 
-    fetch("https://assignment-10-server-five-rose.vercel.app/applied-visas", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(appliedVisaInfo),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.insertedId) {
+    axios
+      .post(
+        "https://assignment-10-server-five-rose.vercel.app/applied-visas",
+        appliedVisaInfo
+      )
+      .then((res) => {
+        if (res.data.insertedId) {
           document.getElementById("my_modal_1").close();
           Swal.fire({
             position: "center",

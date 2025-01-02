@@ -9,3 +9,7 @@ footer #nav a.active {
 body {
   overflow-x: hidden;
 }
+
+nav ul a.active {
+  color: #3b9df8;
+}

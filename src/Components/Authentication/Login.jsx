@@ -29,7 +29,9 @@ const Login = () => {
       .then((result) => {
         const user = { email: email };
         axios
-          .post("http://localhost:4000/jwt", user)
+          .post("https://assignment-10-server-five-rose.vercel.app/jwt", user, {
+            withCredentials: true,
+          })
           .then((data) => console.log(data));
         setUser(result.user);
         navigate(location?.state ? location.state : "/");

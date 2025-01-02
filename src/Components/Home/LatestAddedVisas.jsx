@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { FaFlag } from "react-icons/fa";
 import { RxBorderSolid } from "react-icons/rx";
@@ -7,11 +8,11 @@ const LatestAddedVisas = () => {
   const [latestVisas, setLatestVisas] = useState([]);
 
   useEffect(() => {
-    fetch(
-      "https://assignment-10-server-five-rose.vercel.app/latest-added-visas"
-    )
-      .then((res) => res.json())
-      .then((data) => setLatestVisas(data));
+    axios
+      .get(
+        "https://assignment-10-server-five-rose.vercel.app/latest-added-visas"
+      )
+      .then((res) => setLatestVisas(res.data));
   }, []);
 
   return (

@@ -3,14 +3,13 @@ import { RxBorderSolid } from "react-icons/rx";
 import { FaRegStar } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
 import Rating from "react-rating";
+import axios from "axios";
 
 const ExtraSection2 = () => {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    fetch("../reviews.json")
-      .then((res) => res.json())
-      .then((data) => setReviews(data));
+    axios.get("../reviews.json").then((res) => setReviews(res.data));
   }, []);
 
   return (
