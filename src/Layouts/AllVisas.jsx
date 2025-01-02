@@ -4,19 +4,17 @@ import { FaFlag } from "react-icons/fa";
 import Lottie from "lottie-react";
 import empty from "../assets/empty.json";
 import axios from "axios";
+import useAllVisa from "../hooks/useAllVisa";
 const AllVisas = () => {
-  const [allVisaData, setAllVisaData] = useState([]);
-  const [filter, setFilter] = useState("");
+  const { loader, allVisaData, setFilter } = useAllVisa();
 
-  useEffect(() => {
-    const fetchAllVIsaData = async () => {
-      const { data } = await axios.get(
-        `https://assignment-10-server-five-rose.vercel.app/visa?filter=${filter}`
-      );
-      setAllVisaData(data);
-    };
-    fetchAllVIsaData();
-  }, [filter]);
+  if (loader) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <span className="loading loading-spinner loading-lg"></span>
+      </div>
+    );
+  }
 
   return (
     <div>

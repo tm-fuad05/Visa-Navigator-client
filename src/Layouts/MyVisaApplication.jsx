@@ -1,27 +1,20 @@
 import Lottie from "lottie-react";
-import React, { useContext, useEffect, useState } from "react";
 
 import empty from "../assets/empty.json";
 import VisaApplicationCard from "../Components/VisaApplicationCard";
-import { AuthContext } from "../Provider/AuthProvider";
-import axios from "axios";
-const MyVisaApplication = () => {
-  const { user } = useContext(AuthContext);
-  const [myAppliedVisas, setMyAppliedVisas] = useState([]);
-  const [search, setSearch] = useState("");
 
-  useEffect(() => {
-    const fetchMyAppliedVisas = async () => {
-      const { data } = await axios.get(
-        `https://assignment-10-server-five-rose.vercel.app/applied-visas?email=${user.email}&search=${search}`,
-        {
-          withCredentials: true,
-        }
-      );
-      setMyAppliedVisas(data);
-    };
-    fetchMyAppliedVisas();
-  }, [user.email, search]);
+import useMyAppliedVisa from "../hooks/useMyAppliedVisa";
+const MyVisaApplication = () => {
+  const { myAppliedVisas, loader, setSearch, setMyAppliedVisas } =
+    useMyAppliedVisa();
+
+  if (loader) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <span className="loading loading-spinner loading-lg"></span>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-[#f3f4f6] border border-b-[#f3f4f6]">

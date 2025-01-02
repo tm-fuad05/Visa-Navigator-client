@@ -1,4 +1,3 @@
-import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import { FaFlag } from "react-icons/fa";
 import Swal from "sweetalert2/dist/sweetalert2.js";
@@ -10,22 +9,19 @@ import { FiTrash } from "react-icons/fi";
 import Lottie from "lottie-react";
 import empty from "../assets/empty.json";
 import axios from "axios";
+
+import useMyAddedVisa from "../hooks/useMyAddedVisa";
 const MyAddedVisas = () => {
-  const { user } = useContext(AuthContext);
-  const { email } = user;
+  // const { loader, myVisaData } = useMyAddedVisa();
+  const { loader, myVisaData, setMyVisaData } = useMyAddedVisa();
 
-  const [myVisaData, setMyVisaData] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get(
-        `https://assignment-10-server-five-rose.vercel.app/my-added-visas?email=${email}`,
-        {
-          withCredentials: true,
-        }
-      )
-      .then((res) => console.log(setMyVisaData(res.data)));
-  }, []);
+  if (loader) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <span className="loading loading-spinner loading-lg"></span>
+      </div>
+    );
+  }
 
   const handleDelete = (id) => {
     Swal.fire({
