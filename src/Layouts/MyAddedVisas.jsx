@@ -12,8 +12,7 @@ import axios from "axios";
 
 import useMyAddedVisa from "../hooks/useMyAddedVisa";
 const MyAddedVisas = () => {
-  // const { loader, myVisaData } = useMyAddedVisa();
-  const { loader, myVisaData, setMyVisaData } = useMyAddedVisa();
+  const { loader, myVisaData } = useMyAddedVisa();
 
   if (loader) {
     return (
@@ -52,9 +51,6 @@ const MyAddedVisas = () => {
           });
       }
     });
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault();
   };
 
   return (
