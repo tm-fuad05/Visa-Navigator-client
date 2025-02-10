@@ -39,11 +39,15 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="flex items-center justify-between  relative bg-white boxShadow rounded-full px-4 lg:px-8 py-2 lg:py-3">
-      <a href="/" className="text-xl font-logo font-bold ml-2 lg:ml-0">
-        <span className="text-blue-600 text-3xl">V</span>isorix
+    <nav className="flex items-center justify-between relative bg-white boxShadow rounded-full px-4 lg:px-8 py-2 lg:py-4">
+      <a
+        href="/"
+        className="text-2xl lg:text-3xl font-logo font-bold ml-2 lg:ml-0"
+      >
+        <span className="text-blue-600 text-4xl lg:text-5xl">V</span>
+        isorix
       </a>
-      <ul className="items-center gap-[25px] text-[1rem] text-[#424242] lg:flex hidden">
+      <ul className="items-center gap-[25px] text-lg text-[#424242] lg:flex hidden">
         <li className="before:w-0 hover:before:w-full before:bg-[#3B9DF8] before:h-[2px] before:transition-all before:duration-300 before:absolute relative before:rounded-full before:bottom-[-2px] hover:text-[#3B9DF8] transition-all duration-300 before:left-0 cursor-pointer capitalize">
           <NavLink to="/">Home</NavLink>
         </li>
@@ -78,33 +82,34 @@ const Navbar = () => {
               />
             </figure>
           ) : (
-            <FaUserCircle className="text-4xl" />
+            <FaUserCircle className="text-3xl md:text-4xl" />
           )}
         </div>
-        {user?.email ? (
-          <button
-            onClick={handleSignOut}
-            className="btn text-white bg-gradient-to-r from-red-500 to-orange-500 hover:from-orange-500 hover:to-red-500 hover:scale-105 duration-500 focus:outline-none"
-          >
-            Sign Out
-          </button>
-        ) : (
-          <Link
-            to="/auth/sign-in"
-            className="btn text-white bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-indigo-500 hover:to-blue-500 hover:scale-105 duration-500 focus:outline-none"
-          >
-            Login
-          </Link>
-        )}
-        {!user?.email && (
-          <Link
-            to="/auth/register"
-            className="btn text-white bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-blue-500 hover:to-cyan-400 hover:scale-105 duration-500 focus:outline-none"
-          >
-            Sign Up
-          </Link>
-        )}
-
+        <div className="hidden md:block space-x-2">
+          {user?.email ? (
+            <button
+              onClick={handleSignOut}
+              className="btn text-white bg-gradient-to-r from-red-500 to-orange-500 hover:from-orange-500 hover:to-red-500 hover:scale-105 duration-500 focus:outline-none"
+            >
+              Sign Out
+            </button>
+          ) : (
+            <Link
+              to="/auth/sign-in"
+              className="btn text-white bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-indigo-500 hover:to-blue-500 hover:scale-105 duration-500 focus:outline-none"
+            >
+              Login
+            </Link>
+          )}
+          {!user?.email && (
+            <Link
+              to="/auth/register"
+              className="btn text-white bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-blue-500 hover:to-cyan-400 hover:scale-105 duration-500 focus:outline-none"
+            >
+              Sign Up
+            </Link>
+          )}
+        </div>
         <button
           onClick={() => setMobileSidebarOpen(!mobileSidebarOpen)}
           className="lg:hidden"
@@ -120,7 +125,7 @@ const Navbar = () => {
       <aside
         className={` ${
           mobileSidebarOpen ? "z-20" : "hidden z-[-1]"
-        } lg:hidden bg-white boxShadow p-4 text-center absolute top-[65px] right-0 w-full rounded-md transition-all duration-300`}
+        } lg:hidden bg-white boxShadow p-4 text-center absolute top-[57px] md:top-[65px] right-0 w-full rounded-md rounded-t-none transition-all duration-300`}
       >
         <ul className="items-center gap-[20px] text-[1rem] text-gray-600 flex flex-col">
           <li className="hover:border-b-[#3B9DF8] border-b-[2px] border-transparent transition-all duration-500 cursor-pointer capitalize">
@@ -145,6 +150,31 @@ const Navbar = () => {
             <NavLink to="/contact-us">Contact</NavLink>
           </li>
         </ul>
+        <div className="flex flex-col gap-2 mt-7">
+          {user?.email ? (
+            <button
+              onClick={handleSignOut}
+              className="btn btn-sm text-white bg-gradient-to-r from-red-500 to-orange-500 hover:from-orange-500 hover:to-red-500 hover:scale-105 duration-500 focus:outline-none"
+            >
+              Sign Out
+            </button>
+          ) : (
+            <Link
+              to="/auth/sign-in"
+              className="btn btn-sm text-white bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-indigo-500 hover:to-blue-500 hover:scale-105 duration-500 focus:outline-none"
+            >
+              Login
+            </Link>
+          )}
+          {!user?.email && (
+            <Link
+              to="/auth/register"
+              className="btn btn-sm text-white bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-blue-500 hover:to-cyan-400 hover:scale-105 duration-500 focus:outline-none"
+            >
+              Sign Up
+            </Link>
+          )}
+        </div>
       </aside>
     </nav>
   );
