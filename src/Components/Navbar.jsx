@@ -47,7 +47,7 @@ const Navbar = () => {
         <span className="text-blue-600 text-4xl lg:text-5xl">V</span>
         isorix
       </a>
-      <ul className="items-center gap-[25px] text-lg text-[#424242] lg:flex hidden">
+      <ul className="items-center gap-[30px] text-lg text-[#424242] lg:flex hidden">
         <li className="before:w-0 hover:before:w-full before:bg-[#3B9DF8] before:h-[2px] before:transition-all before:duration-300 before:absolute relative before:rounded-full before:bottom-[-2px] hover:text-[#3B9DF8] transition-all duration-300 before:left-0 cursor-pointer capitalize">
           <NavLink to="/">Home</NavLink>
         </li>
@@ -57,12 +57,16 @@ const Navbar = () => {
         <li className="before:w-0 hover:before:w-full before:bg-[#3B9DF8] before:h-[2px] before:transition-all before:duration-300 before:absolute relative before:rounded-full before:bottom-[-2px] hover:text-[#3B9DF8] transition-all duration-300 before:left-0 cursor-pointer capitalize">
           <NavLink to="/add-visa">Add Visa</NavLink>
         </li>
-        <li className="before:w-0 hover:before:w-full before:bg-[#3B9DF8] before:h-[2px] before:transition-all before:duration-300 before:absolute relative before:rounded-full before:bottom-[-2px] hover:text-[#3B9DF8] transition-all duration-300 before:left-0 cursor-pointer capitalize">
-          <NavLink to="/my-added-visas">My Added Visas</NavLink>
-        </li>
-        <li className="before:w-0 hover:before:w-full before:bg-[#3B9DF8] before:h-[2px] before:transition-all before:duration-300 before:absolute relative before:rounded-full before:bottom-[-2px] hover:text-[#3B9DF8] transition-all duration-300 before:left-0 cursor-pointer capitalize">
-          <NavLink to="/my-visa-application">My Visa applications</NavLink>
-        </li>
+        {user && (
+          <li className="before:w-0 hover:before:w-full before:bg-[#3B9DF8] before:h-[2px] before:transition-all before:duration-300 before:absolute relative before:rounded-full before:bottom-[-2px] hover:text-[#3B9DF8] transition-all duration-300 before:left-0 cursor-pointer capitalize">
+            <NavLink to="/my-added-visas">My Added Visas</NavLink>
+          </li>
+        )}
+        {user && (
+          <li className="before:w-0 hover:before:w-full before:bg-[#3B9DF8] before:h-[2px] before:transition-all before:duration-300 before:absolute relative before:rounded-full before:bottom-[-2px] hover:text-[#3B9DF8] transition-all duration-300 before:left-0 cursor-pointer capitalize">
+            <NavLink to="/my-visa-application">My Visa applications</NavLink>
+          </li>
+        )}
         <li className="before:w-0 hover:before:w-full before:bg-[#3B9DF8] before:h-[2px] before:transition-all before:duration-300 before:absolute relative before:rounded-full before:bottom-[-2px] hover:text-[#3B9DF8] transition-all duration-300 before:left-0 cursor-pointer capitalize">
           <NavLink to="/about-us">About Us</NavLink>
         </li>
