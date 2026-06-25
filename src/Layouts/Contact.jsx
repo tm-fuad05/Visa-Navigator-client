@@ -1,166 +1,180 @@
-import React from "react";
+import React, { useState } from "react";
+import { motion } from "framer-motion"; // framer-motion ইম্পোর্ট করা হয়েছে
+import { FiMapPin, FiMail, FiPhone, FiSend, FiUser } from "react-icons/fi";
 
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // আপনার সাবমিট হ্যান্ডলার লজিক এখানে যুক্ত করুন (যেমন: axios.post)
+    console.log("Form Submitted:", formData);
+  };
+
   return (
-    <div>
-      <div className="bg-gray-100 py-12 px-6 lg:px-32">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
-          Contact Us
-        </h2>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div className="bg-white shadow-md rounded-lg p-6">
-            <form className="space-y-6">
-              <div>
-                <label
-                  for="name"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Full Name
-                </label>
+    <div className="bg-white min-h-screen select-none pt-24 pb-20">
+      {/* Header Hero Section */}
+      <div className="text-center py-10 lg:py-14  border-b border-gray-50 mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: -15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="space-y-2"
+        >
+          <h2 className="text-3xl lg:text-4xl font-bold tracking-tight text-gray-900">
+            Contact Us
+          </h2>
+          <p className="text-xs text-gray-400 font-bold  ">
+            Get in touch with our team of global experts
+          </p>
+        </motion.div>
+      </div>
+
+      {/* Main Two-Column Layout Panel */}
+      <div className="w-11/12 mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        {/* Left Column: Interactive Form Terminal (7 Cols) */}
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="lg:col-span-7 bg-gray-50/50 border border-gray-100 rounded-3xl p-6 sm:p-10"
+        >
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Full Name Node */}
+            <div className="space-y-2">
+              <label
+                htmlFor="name"
+                className="text-[11px] font-bold   text-gray-600 block"
+              >
+                Full Name
+              </label>
+              <div className="relative flex items-center">
+                <FiUser className="absolute left-4 text-gray-600 text-sm pointer-events-none" />
                 <input
                   type="text"
                   id="name"
                   name="name"
                   required
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                  placeholder="Your Name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="w-full pl-11 pr-4 py-3.5 text-xs font-semibold bg-white border border-gray-100 rounded-xl outline-none text-gray-800 focus:border-primaryBlue shadow-sm shadow-gray-100/50 transition-all duration-300 placeholder:text-gray-300"
+                  placeholder="John Doe"
                 />
               </div>
+            </div>
 
-              <div>
-                <label
-                  for="email"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Email Address
-                </label>
+            {/* Email Address Node */}
+            <div className="space-y-2">
+              <label
+                htmlFor="email"
+                className="text-[11px] font-bold   text-gray-600 block"
+              >
+                Email Address
+              </label>
+              <div className="relative flex items-center">
+                <FiMail className="absolute left-4 text-gray-600 text-sm pointer-events-none" />
                 <input
                   type="email"
                   id="email"
                   name="email"
                   required
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                  placeholder="yourname@example.com"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full pl-11 pr-4 py-3.5 text-xs font-semibold bg-white border border-gray-100 rounded-xl outline-none text-gray-800 focus:border-primaryBlue shadow-sm shadow-gray-100/50 transition-all duration-300 placeholder:text-gray-300"
+                  placeholder="johndoe@example.com"
                 />
               </div>
-
-              <div>
-                <label
-                  for="message"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows="4"
-                  required
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                  placeholder="Your Message"
-                ></textarea>
-              </div>
-
-              <div>
-                <button
-                  type="submit"
-                  className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                >
-                  Send Message
-                </button>
-              </div>
-            </form>
-          </div>
-
-          <div className="bg-white shadow-md rounded-lg p-6 space-y-6">
-            <div className="flex items-center">
-              <div className="p-3 bg-indigo-100 rounded-full">
-                <svg
-                  className="h-6 w-6 text-indigo-600"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M3 10l9-7 9 7-9 7-9-7z"
-                  />
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 21V11.39l-6 4.5V21h6z"
-                  />
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M15 21h6v-5.11l-6-4.5V21z"
-                  />
-                </svg>
-              </div>
-              <div className="ml-4">
-                <h3 className="text-lg font-semibold">Address</h3>
-                <p className="text-gray-600">Washington 165,NY CA</p>
-              </div>
             </div>
 
-            <div className="flex items-center">
-              <div className="p-3 bg-indigo-100 rounded-full">
-                <svg
-                  className="h-6 w-6 text-indigo-600"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M2.003 10.25C3.99 5.25 8.184 2 12 2s8.01 3.25 9.997 8.25a3.248 3.248 0 01-.27 3.196c-1.517 1.94-4.997 5.054-9.727 8.524-4.73-3.47-8.21-6.583-9.727-8.524A3.248 3.248 0 012.003 10.25z"
-                  />
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M15 10h.01"
-                  />
-                </svg>
-              </div>
-              <div className="ml-4">
-                <h3 className="text-lg font-semibold">Email</h3>
-                <p className="text-gray-600">visorixofficial@gmail.com</p>
-              </div>
+            {/* Message Textarea Node */}
+            <div className="space-y-2">
+              <label
+                htmlFor="message"
+                className="text-[11px] font-bold   text-gray-600 block"
+              >
+                Message
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                rows="5"
+                required
+                value={formData.message}
+                onChange={handleChange}
+                className="w-full px-4 py-3.5 text-xs font-semibold bg-white border border-gray-100 rounded-xl outline-none text-gray-800 focus:border-primaryBlue shadow-sm shadow-gray-100/50 transition-all duration-300 placeholder:text-gray-300 resize-none"
+                placeholder="Write your message here..."
+              ></textarea>
             </div>
 
-            <div className="flex items-center">
-              <div className="p-3 bg-indigo-100 rounded-full">
-                <svg
-                  className="h-6 w-6 text-indigo-600"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M3 8l7-5m0 0l7 5m-7-5v12m5-6h5m-5 6h5"
-                  />
-                </svg>
-              </div>
-              <div className="ml-4">
-                <h3 className="text-lg font-semibold">Phone</h3>
-                <p className="text-gray-600">+31 85 964 47 25</p>
-              </div>
+            {/* Submit Action Block */}
+            <button
+              type="submit"
+              className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 text-xs font-bold   text-white bg-gradient-to-r from-primaryBlue to-secondaryIndigo rounded-xl shadow-md shadow-primaryBlue/15 active:scale-[0.99] transition-all duration-300 cursor-pointer"
+            >
+              <FiSend className="text-sm" />
+              Send Message
+            </button>
+          </form>
+        </motion.div>
+
+        {/* Right Column: Info Terminal Info Grid (5 Cols) */}
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="lg:col-span-5 space-y-4"
+        >
+          {/* Address Node */}
+          <div className="flex items-center p-5 bg-gray-50/40 border border-gray-100 rounded-2xl shadow-sm shadow-gray-50/50">
+            <div className="p-3 bg-white border border-gray-100 text-primaryBlue rounded-xl shadow-sm">
+              <FiMapPin className="text-base" />
+            </div>
+            <div className="ml-4 space-y-0.5">
+              <h3 className="text-xs font-bold  tracking-wider text-gray-900">
+                Address
+              </h3>
+              <p className="text-xs font-semibold text-gray-500">
+                Washington 165, NY CA
+              </p>
             </div>
           </div>
-        </div>
+
+          {/* Email Node */}
+          <div className="flex items-center p-5 bg-gray-50/40 border border-gray-100 rounded-2xl shadow-sm shadow-gray-50/50">
+            <div className="p-3 bg-white border border-gray-100 text-secondaryIndigo rounded-xl shadow-sm">
+              <FiMail className="text-base" />
+            </div>
+            <div className="ml-4 space-y-0.5">
+              <h3 className="text-xs font-bold  tracking-wider text-gray-900">
+                Email
+              </h3>
+              <p className="text-xs font-semibold text-gray-500 lowercase">
+                visorixofficial@gmail.com
+              </p>
+            </div>
+          </div>
+
+          {/* Phone Node */}
+          <div className="flex items-center p-5 bg-gray-50/40 border border-gray-100 rounded-2xl shadow-sm shadow-gray-50/50">
+            <div className="p-3 bg-white border border-gray-100 text-blue-500 rounded-xl shadow-sm">
+              <FiPhone className="text-base" />
+            </div>
+            <div className="ml-4 space-y-0.5">
+              <h3 className="text-xs font-bold  tracking-wider text-gray-900">
+                Phone
+              </h3>
+              <p className="text-xs font-semibold text-gray-500">{`+31 85 964 47 25`}</p>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </div>
   );

@@ -1,90 +1,131 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { FiMapPin, FiPhone, FiMail, FiClock, FiSend } from "react-icons/fi";
+import { FaTwitter, FaYoutube, FaFacebookF } from "react-icons/fa";
+import Logo from "./shared/Logo";
 
 const Footer = () => {
+  const getFooterLinkClass = ({ isActive }) => {
+    const base =
+      "text-xs font-bold   text-gray-500 hover:text-primaryBlue transition-colors duration-300 py-0.5 relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-primaryBlue after:transition-all after:duration-300";
+    return isActive
+      ? `${base} text-primaryBlue after:w-full`
+      : `${base} after:w-0 hover:after:w-full`;
+  };
+
   return (
-    <div className="bg-gray-200">
-      <footer className="footer  text-base-content p-10 md:p-12 lg:p-16">
-        <nav className="text-black">
-          <div className="flex justify-between items-center gap-2 mb-5">
-            <div>
-              <a href="/" className="text-xl font-logo font-bold ml-2 lg:ml-0">
-                <span className="text-blue-600 text-3xl">V</span>isorix
-              </a>
+    <div className="w-11/12 mx-auto bg-white border-t border-gray-100 select-none pt-16 pb-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-20 pb-12 border-b border-gray-50">
+        {/* Column 1: Brand Info Terminal */}
+        <div className="space-y-6">
+          <div className="flex items-center gap-2">
+            <Logo />
+          </div>
+
+          {/* Contact Node Info Grid */}
+          <div className="space-y-3.5 text-xs font-semibold text-gray-500 tracking-wide">
+            <div className="flex items-start gap-3">
+              <FiMapPin className="text-sm text-primaryBlue mt-0.5 flex-shrink-0" />
+              <span>Location: av. Washington 165, NY CA 54003</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <FiPhone className="text-sm text-primaryBlue flex-shrink-0" />
+              <span>+31 85 964 47 25</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <FiMail className="text-sm text-primaryBlue flex-shrink-0" />
+              <span className="lowercase">visorixofficial@gmail.com</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <FiClock className="text-sm text-primaryBlue flex-shrink-0" />
+              <span>9.00 AM - 5.00 PM</span>
             </div>
           </div>
-          <a className="link link-hover">Location: av. Washington 165,NY CA</a>
-          <a className="link link-hover">54003</a>
-          <a className="link link-hover">Phone: +31 85 964 47 25</a>
-          <a className="link link-hover">Email: visorixofficial@gmail.com</a>
-          <a className="link link-hover">Opening hours: 9.00 AM - 5.00 PM</a>
-          <nav className="text-black">
-            <div className="grid grid-flow-col gap-4">
-              <a>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  className="fill-current"
-                >
-                  <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path>
-                </svg>
-              </a>
-              <a>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  className="fill-current"
-                >
-                  <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"></path>
-                </svg>
-              </a>
-              <a>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  className="fill-current"
-                >
-                  <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path>
-                </svg>
-              </a>
-            </div>
+
+          {/* Social Network Terminal Nodes */}
+          <div className="flex items-center gap-3 pt-2">
+            <a
+              href="#"
+              className="p-2.5 rounded-xl border border-gray-100 bg-gray-50/50 text-gray-400 hover:text-primaryBlue hover:bg-primaryBlue/5 hover:border-primaryBlue/20 transition-all duration-300"
+            >
+              <FaTwitter className="text-sm" />
+            </a>
+            <a
+              href="#"
+              className="p-2.5 rounded-xl border border-gray-100 bg-gray-50/50 text-gray-400 hover:text-primaryRed hover:bg-primaryRed/5 hover:border-primaryRed/20 transition-all duration-300"
+            >
+              <FaYoutube className="text-sm" />
+            </a>
+            <a
+              href="#"
+              className="p-2.5 rounded-xl border border-gray-100 bg-gray-50/50 text-gray-400 hover:text-blue-600 hover:bg-blue-50 hover:border-blue-200 transition-all duration-300"
+            >
+              <FaFacebookF className="text-xs" />
+            </a>
+          </div>
+        </div>
+
+        {/* Column 2: Useful Links Node Navigation */}
+        <div className="md:pl-10 space-y-6">
+          <h6 className="text-xs font-bold   text-gray-900 border-b border-gray-50 pb-3">
+            Useful Links
+          </h6>
+          <nav className="flex flex-col gap-4 items-start">
+            <NavLink to="/" className={getFooterLinkClass}>
+              Home
+            </NavLink>
+            <NavLink to="/all-visas" className={getFooterLinkClass}>
+              All Visas
+            </NavLink>
+            <NavLink to="/about-us" className={getFooterLinkClass}>
+              About Us
+            </NavLink>
+            <NavLink to="/contact-us" className={getFooterLinkClass}>
+              Contact
+            </NavLink>
           </nav>
-        </nav>
-        <nav id="nav" className="text-black">
-          <h6 className="text-black text-lg font-bold mb-3">Useful links</h6>
-          <NavLink className={"hover:text-blue-600"} to="/">
-            Home
-          </NavLink>
+        </div>
 
-          <NavLink className={"hover:text-blue-600"} to="/about-us">
-            About Us
-          </NavLink>
-          <NavLink className={"hover:text-blue-600"} to="/contact-us">
-            Contact
-          </NavLink>
-        </nav>
-        <nav>
-          <h4 className="text-black text-xl font-bold mb-3">Drop a Message</h4>
-          <input
-            type="text"
-            className="p-4  rounded-lg bg-[#FFFFFF] text-black font-semibold"
-            placeholder="Email"
-          />
+        {/* Column 3: Newsletter Action Terminal */}
+        <div className="space-y-6">
+          <div className="space-y-1">
+            <h6 className="text-xs font-bold   text-gray-900">
+              Drop a Message
+            </h6>
+            <p className="text-[11px] text-gray-400 font-medium">
+              Subscribe to receive regular updates.
+            </p>
+          </div>
 
-          <button className="btn border-none bg-gradient-to-r from-red-500 to-orange-500 hover:from-orange-500 hover:to-red-500 hover:scale-105 text-white  w-full">
-            Subscribe
-          </button>
-        </nav>
-      </footer>
-      <p className="text-center pb-5">
-        &copy;2024 Visorix. All Rights Reserved.
-      </p>
+          <form onSubmit={(e) => e.preventDefault()} className="space-y-3">
+            <div className="relative">
+              <input
+                type="email"
+                required
+                className="w-full px-4 py-3 text-xs font-semibold rounded-xl bg-gray-50 border border-gray-100 focus:border-primaryBlue focus:bg-white text-gray-800 transition-all duration-300 outline-none placeholder:text-gray-400"
+                placeholder="Enter your email"
+              />
+            </div>
+            <button className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 text-xs font-bold   text-white bg-gradient-to-r from-primaryBlue to-secondaryIndigo rounded-xl shadow-md shadow-primaryBlue/15 active:scale-[0.98] transition-all duration-300 cursor-pointer">
+              <FiSend className="text-sm" />
+              Subscribe
+            </button>
+          </form>
+        </div>
+      </div>
+
+      {/* Bottom Copyright Base Node */}
+      <div className="mx-auto px-4 sm:px-6 lg:px-8 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] font-bold tracking-wider text-gray-400 ">
+        <p>&copy; {new Date().getFullYear()} Visorix. All Rights Reserved.</p>
+        <div className="flex items-center gap-6">
+          <a href="#" className="hover:text-primaryBlue transition-colors">
+            Privacy Policy
+          </a>
+          <a href="#" className="hover:text-primaryBlue transition-colors">
+            Terms of Service
+          </a>
+        </div>
+      </div>
     </div>
   );
 };

@@ -30,28 +30,30 @@
 
 ## Data Structure
 
-| Field                | Type                 | Description                                                                 |
-|----------------------|----------------------|-----------------------------------------------------------------------------|
-| `Country Image`      | String (URL)        | Image of the country.                                                      |
-| `Country Name`       | String              | Name of the country.                                                       |
-| `Visa Type`          | String              | Type of visa (e.g., Tourist, Student, Official).                           |
-| `Processing Time`    | String              | Time required for visa processing.                                         |
-| `Required Documents` | Array of Strings    | List of documents required (e.g., Passport, Photo, Application Form).      |
-| `Description`        | String              | Detailed description of the visa.                                          |
-| `Age Restriction`    | Number              | Minimum age requirement for the visa.                                      |
-| `Fee`                | Number              | Cost of the visa.                                                          |
-| `Validity`           | String              | Duration of the visa validity.                                             |
-| `Application Method` | String              | Instructions or process for applying for the visa.                         |
+| Field                | Type             | Description                                                           |
+| -------------------- | ---------------- | --------------------------------------------------------------------- |
+| `Country Image`      | String (URL)     | Image of the country.                                                 |
+| `Country Name`       | String           | Name of the country.                                                  |
+| `Visa Type`          | String           | Type of visa (e.g., Tourist, Student, Official).                      |
+| `Processing Time`    | String           | Time required for visa processing.                                    |
+| `Required Documents` | Array of Strings | List of documents required (e.g., Passport, Photo, Application Form). |
+| `Description`        | String           | Detailed description of the visa.                                     |
+| `Age Restriction`    | Number           | Minimum age requirement for the visa.                                 |
+| `Fee`                | Number           | Cost of the visa.                                                     |
+| `Validity`           | String           | Duration of the visa validity.                                        |
+| `Application Method` | String           | Instructions or process for applying for the visa.                    |
 
 ---
 
 ## Website Layout Structure
 
 ### Navbar
+
 - **Components**: Logo/Website Name, Navigation Links (Home, All Visas, Add Visa, My Added Visas, My Visa Applications), Login/Register Buttons or User Profile (with hover displayName).
 - **Behavior**: Conditional rendering based on user authentication.
 
 ### Footer
+
 - **Content**: Website name, copyright information, contact details, and social media links.
 - **Appearance**: Present on all pages except the 404 page.
 
@@ -60,13 +62,15 @@
 ## Authentication
 
 ### Login Page
+
 - **Form Fields**: Email, Password, Forgot Password Link, Login Button.
 - **Additional Options**: Link to Register, Google Social Login.
 - **Behavior**: Redirect to desired route/home on success, show error message on failure.
 
 ### Register Page
+
 - **Form Fields**: Name, Email, Photo URL, Password, Register Button.
-- **Password Validation**: Must contain uppercase, lowercase, and be at least 6 characters long.
+- **Password Validation**: Must contain , lowercase, and be at least 6 characters long.
 - **Additional Options**: Link to Login, Google Social Login.
 - **Behavior**: Redirect to desired route/home on success, show error message on failure.
 
@@ -75,6 +79,7 @@
 ## Home Page
 
 ### Sections
+
 1. **Navbar**
 2. **Banner/Slider**: Minimum 3 slides with meaningful information.
 3. **Latest Visas**: Showcase 6 newest visa cards with `See Details` button and `See All Visas` link.

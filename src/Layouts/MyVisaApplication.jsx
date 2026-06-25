@@ -1,65 +1,83 @@
+import React from "react";
 import Lottie from "lottie-react";
-
+import { motion } from "framer-motion";
+import { FiSearch } from "react-icons/fi";
 import empty from "../assets/empty.json";
 import VisaApplicationCard from "../Components/VisaApplicationCard";
-
 import useMyAppliedVisa from "../hooks/useMyAppliedVisa";
+import Loader from "../Components/shared/Loader";
+
 const MyVisaApplication = () => {
   const { myAppliedVisas, loader, setSearch, setMyAppliedVisas } =
     useMyAppliedVisa();
 
-  if (loader) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <span className="loading loading-spinner loading-lg"></span>
-      </div>
-    );
-  }
-
   return (
-    <div className="bg-[#f3f4f6] border border-b-[#f3f4f6]">
-      <div className="text-center h-24 lg:h-28 flex items-center justify-center bg-blue-100 mb-10">
-        <h2 class="text-3xl font-bold">My Visa Application</h2>
+    <div className="bg-white min-h-screen select-none pt-24 pb-20">
+      {/* Header Hero Section */}
+      <div className="text-center py-10 lg:py-14  border-b border-gray-50 mb-10">
+        <motion.div
+          initial={{ opacity: 0, y: -15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="space-y-2"
+        >
+          <h2 className="text-3xl lg:text-4xl font-black tracking-tight text-gray-900">
+            My Applied Visas
+          </h2>
+          <p className="text-xs text-gray-400 font-bold  ">
+            Track and monitor the operational lifecycle of your visa submittals
+          </p>
+        </motion.div>
       </div>
-      <label className="input input-bordered flex items-center gap-2 mb-16 w-8/12 md:w-5/12 lg:w-4/12 mx-auto">
+
+      {/* Premium Minimal Search Dynamic Filter Bar */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.98 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.4, delay: 0.1 }}
+        className="w-11/12 max-w-md mx-auto mb-16 relative flex items-center"
+      >
+        <FiSearch className="absolute left-4 text-gray-400 text-sm" />
         <input
           onChange={(e) => setSearch(e.target.value)}
           type="text"
-          className="grow"
-          placeholder="Search"
+          placeholder="Search country nodes..."
+          className="w-full pl-11 pr-4 py-3 text-xs font-semibold bg-gray-50/50 border border-gray-100 rounded-2xl outline-none text-gray-800 focus:bg-white focus:border-primaryBlue focus:shadow-sm focus:shadow-blue-50/50 transition-all duration-300"
         />
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 16 16"
-          fill="currentColor"
-          className="h-4 w-4 opacity-70"
-        >
-          <path
-            fillRule="evenodd"
-            d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-            clipRule="evenodd"
-          />
-        </svg>
-      </label>
-      {myAppliedVisas.length === 0 ? (
-        <div>
-          <figure className="w-5/12 mx-auto">
-            <Lottie classID="w-full" animationData={empty} />
-          </figure>
-          <h3 className="text-xl lg:text-4xl font-bold mb-20 w-7/12 mx-auto text-gray-500 mt-5 text-center">
-            No Data Found
-          </h3>
-        </div>
+      </motion.div>
+
+      {/* Conditional Interface Engine */}
+      {loader ? (
+        <Loader />
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 w-11/12 mx-auto mb-20">
-          {myAppliedVisas.map((appliedVisaCard) => (
-            <VisaApplicationCard
-              key={appliedVisaCard._id}
-              appliedVisaCard={appliedVisaCard}
-              myAppliedVisas={myAppliedVisas}
-              setMyAppliedVisas={setMyAppliedVisas}
-            />
-          ))}
+        <div>
+          {" "}
+          {myAppliedVisas.length === 0 ? (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="flex flex-col items-center justify-center py-10"
+            >
+              <figure className="w-64 max-w-full opacity-80">
+                <Lottie animationData={empty} loop={true} />
+              </figure>
+              <h3 className="text-sm font-black   text-gray-400 mt-6 text-center">
+                No Active Submissions Found
+              </h3>
+            </motion.div>
+          ) : (
+            /* Response Grid Base Shell */
+            <div className="w-11/12 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {myAppliedVisas.map((appliedVisaCard) => (
+                <VisaApplicationCard
+                  key={appliedVisaCard._id}
+                  appliedVisaCard={appliedVisaCard}
+                  myAppliedVisas={myAppliedVisas}
+                  setMyAppliedVisas={setMyAppliedVisas}
+                />
+              ))}
+            </div>
+          )}
         </div>
       )}
     </div>

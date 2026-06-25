@@ -1,95 +1,107 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { FaFlag } from "react-icons/fa";
+import { motion, AnimatePresence } from "framer-motion"; // framer-motion ইম্পোর্ট করা হয়েছে
 import Lottie from "lottie-react";
 import empty from "../assets/empty.json";
-import axios from "axios";
 import useAllVisa from "../hooks/useAllVisa";
+import VisaCard from "../Components/AllVisaCard/VisaCard";
+import { FiSliders } from "react-icons/fi";
+import Loader from "../Components/shared/Loader";
+
 const AllVisas = () => {
   const { loader, allVisaData, setFilter } = useAllVisa();
 
-  if (loader) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <span className="loading loading-spinner loading-lg"></span>
-      </div>
-    );
-  }
+  // গ্রিড কন্টেইনারের কাস্টম অ্যানিমেশন ভ্যারিয়েন্ট
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.08 }, // প্রতিটি কার্ড একের পর এক আসবে
+    },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 25 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { type: "spring", stiffness: 100, damping: 15 },
+    },
+  };
 
   return (
-    <div>
-      <div className="text-center h-24 lg:h-28 flex items-center justify-center bg-blue-100 mb-10">
-        <h2 class="text-3xl font-bold">All Visas</h2>
-      </div>
-      <div className="w-11/12 mx-auto">
-        <select
-          onChange={(e) => setFilter(e.target.value)}
-          className="select select-bordered w-5/12 md:w-2/12 mb-10"
+    <div className="w-11/12 mx-auto bg-white select-none pb-24 pt-20">
+      {/* Dynamic Header Hero Terminal */}
+      <div className="text-center py-12 lg:py-16  border-b border-gray-50 mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: -15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="space-y-2"
         >
-          <option selected disabled>
-            Visa Type
-          </option>
-
-          <option>Tourist Visa</option>
-          <option>Student Visa</option>
-          <option>Official Visa</option>
-        </select>
+          <h2 className="text-3xl lg:text-4xl font-bold tracking-tight text-gray-900">
+            Explore All Visas
+          </h2>
+          <p className="text-xs text-gray-400 font-bold  ">
+            Find and apply for your ideal global destination
+          </p>
+        </motion.div>
       </div>
 
-      {allVisaData.length === 0 ? (
-        <div>
-          <figure className="w-5/12 mx-auto">
-            <Lottie classID="w-full" animationData={empty} />
-          </figure>
-          <h3 className="text-xl lg:text-4xl font-bold mb-20 w-fit mx-auto text-gray-500 mt-5">
-            No Visa Found
-          </h3>
+      {/* Controller & Filter Terminal Panel */}
+      <div className="w-11/12 mx-auto mb-10 flex items-center justify-start">
+        <div className="relative flex items-center">
+          <FiSliders className="absolute left-4 text-gray-400 text-sm pointer-events-none" />
+          <select
+            onChange={(e) => setFilter(e.target.value)}
+            defaultValue="all"
+            className="w-full pl-10 pr-4 py-3 text-xs font-bold tracking-wider  bg-gray-50 border border-gray-100 rounded-xl outline-none text-gray-700 focus:border-primaryBlue focus:bg-white transition-all duration-300 cursor-pointer appearance-none"
+          >
+            <option value="all">All Visa Types</option>
+            <option value="Tourist Visa">Tourist Visa</option>
+            <option value="Student Visa">Student Visa</option>
+            <option value="Official Visa">Official Visa</option>
+          </select>
+          <div className="absolute right-4 top-1/2 -translate-y-1/2 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent border-t-[5px] border-t-gray-400 pointer-events-none" />
         </div>
+      </div>
+
+      {/* Dynamic Main Body Content Terminal */}
+      {loader ? (
+        <Loader />
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 w-11/12 mx-auto mb-20">
-          {allVisaData.map((visaCard) => (
-            <div
-              key={visaCard._id}
-              className="border border-gray-200  rounded-lg  transition-transform transform hover:scale-105 text-[#1f2937] flex flex-col gap-2 p-4"
+        <AnimatePresence mode="wait">
+          {allVisaData.length === 0 ? (
+            <motion.div
+              key="empty-state"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              className="flex flex-col items-center justify-center py-12"
             >
-              <figure className=" h-64 lg:h-44">
-                <img
-                  className="w-full h-full  object-cover rounded-lg "
-                  src={visaCard.image}
-                  alt="Country Image"
-                />
+              <figure className="w-full max-w-sm mx-auto">
+                <Lottie animationData={empty} loop={true} />
               </figure>
-              <h4 className="text-center text-lg  font-semibold text-[#1f2937] flex items-center gap-2">
-                <FaFlag className="text-[#1f2937]" /> {visaCard.countryName}
-              </h4>
-
-              <div className=" pt-0 flex flex-col gap-2 text-sm lg:text-md">
-                <hr className="opacity-40" />
-                <p className="flex justify-between text-[#1f2937]">
-                  <sapn className="font-bold">Visa Type</sapn>{" "}
-                  <span className="text-gray-400 ">{visaCard.visaType}</span>
-                </p>
-                <p className="flex justify-between text-[#1f2937]">
-                  <sapn className="font-bold">Processing Time</sapn>{" "}
-                  <span className="text-gray-400">
-                    {visaCard.processingTime}
-                  </span>
-                </p>
-                <p className="flex justify-between text-[#1f2937]">
-                  <sapn className="font-bold">Validity</sapn>{" "}
-                  <span className="text-gray-400">{visaCard.validity}</span>
-                </p>
-
-                <Link
-                  to={`/visa/${visaCard._id}`}
-                  class="btn border-none py-2 bg-blue-500 text-white font-bold rounded-lg shadow-md hover:scale-105 transform transition duration-200 mt-3"
-                >
-                  See Details
-                </Link>
-              </div>
-            </div>
-          ))}
-        </div>
+              <h3 className="text-xl lg:text-2xl font-bold text-gray-400 tracking-tight mt-4">
+                No Visa Documents Found
+              </h3>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="visa-grid"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 "
+            >
+              {allVisaData.map((visaCard) => (
+                <motion.div key={visaCard._id} variants={cardVariants}>
+                  <VisaCard visaCard={visaCard} />
+                </motion.div>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
       )}
     </div>
   );

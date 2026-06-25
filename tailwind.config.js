@@ -4,7 +4,12 @@ export default {
 
   theme: {
     extend: {
-      colors: {},
+      colors: {
+        primaryBlue: "#3B82F6",
+        secondaryIndigo: "#6366F1",
+        primaryRed: "#EF4444",
+        secondaryOrange: "#F97316",
+      },
 
       fontFamily: {
         inter: "Inter",

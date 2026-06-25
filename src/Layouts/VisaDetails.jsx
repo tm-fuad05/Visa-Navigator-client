@@ -1,17 +1,26 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import DatePicker from "react-datepicker";
-import { useState } from "react";
+import {
+  FiClock,
+  FiCalendar,
+  FiDollarSign,
+  FiLayers,
+  FiAlertCircle,
+  FiCheckCircle,
+  FiGlobe,
+} from "react-icons/fi";
 import { MdDateRange } from "react-icons/md";
 import "react-datepicker/dist/react-datepicker.css";
-import Swal from "sweetalert2/dist/sweetalert2";
-import "sweetalert2/src/sweetalert2.scss";
+import Swal from "sweetalert2";
 import { AuthContext } from "../Provider/AuthProvider";
 import axios from "axios";
+
 const VisaDetails = () => {
   const { user } = useContext(AuthContext);
-  const { email } = user;
+  const email = user?.email || "";
   const visa = useLoaderData();
+
   const {
     image,
     countryName,
@@ -30,16 +39,15 @@ const VisaDetails = () => {
   const handleApply = (e) => {
     e.preventDefault();
     const form = e.target;
-    const email = form.email.value;
     const firstName = form.firstName.value;
     const lastName = form.lastName.value;
-    const date = form.date.value;
-    const fee = form.fee.value;
+
+    // বাগ ফিক্স: ডেসিমাল বা টেক্সট ফরম্যাটিং সেভ না করে সরাসরি ভ্যালু পাঠানো হলো
     const appliedVisaInfo = {
       email,
       firstName,
       lastName,
-      date,
+      date: form.date.value,
       fee,
       image,
       countryName,
@@ -55,176 +63,250 @@ const VisaDetails = () => {
     axios
       .post(
         "https://assignment-10-server-five-rose.vercel.app/applied-visas",
-        appliedVisaInfo
+        appliedVisaInfo,
       )
       .then((res) => {
         if (res.data.insertedId) {
-          document.getElementById("my_modal_1").close();
+          document.getElementById("apply_visa_modal").close();
           Swal.fire({
             position: "center",
             icon: "success",
-            title: "Successfully Applied Visa",
+            title: "Application Node Registered Successfully",
             showConfirmButton: false,
             timer: 1500,
           });
-
           form.reset();
         }
-      });
+      })
+      .catch((err) =>
+        console.error("Error processing application payload:", err),
+      );
   };
 
   return (
-    <div>
-      <div className="relative bg-[#f3f4f6]">
-        <div className="text-center h-80 flex pt-16 justify-center bg-blue-100 mb-[900px] md:mb-[1000px]">
-          <h1 class="text-4xl lg:text-5xl font-bold text-[#1f2937]  ">
-            Visa Details
-          </h1>
-        </div>
-        <div className=" w-11/12 md:w-9/12 lg:w-7/12 shadow-xl absolute  left-1/2 transform -translate-x-1/2 top-1/2  border border-gray-200  rounded-xl  transition-transform  text-[#1f2937] flex flex-col gap-2 p-5">
-          <figure className="h-52 md:h-80 lg:h-96">
+    <div className="bg-white min-h-screen select-none pb-24">
+      {/* Dynamic Header Section */}
+      <div className="text-center pt-32 pb-16 bg-gradient-to-b from-blue-50/50 to-white border-b border-gray-50">
+        <h1 className="text-3xl lg:text-4xl font-bold tracking-tight text-gray-900">
+          Visa Requirement Profile
+        </h1>
+        <p className="text-xs text-gray-400 font-bold te mt-2">
+          Review system specs before committing submission data
+        </p>
+      </div>
+
+      {/* Main Structural Grid Base */}
+      <div className="w-11/12 max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 mt-12">
+        {/* Left Column: Visual Identity Banner */}
+        <div className="md:col-span-5 space-y-4">
+          <figure className="h-64 md:h-80 w-full overflow-hidden rounded-2xl bg-gray-50 border border-gray-100 shadow-sm">
             <img
               src={image}
-              alt={`${countryName} Visa`}
-              className="w-full h-full object-cover rounded-md"
+              alt={`${countryName} Visa Thumbnail`}
+              className="w-full h-full object-cover"
+              loading="lazy"
             />
           </figure>
-          <h2 className="text-xl font-bold mt-3">{countryName}</h2>
-          <div className="w-fit">
-            <p className="text-green-700 text-sm mb-3 px-2 py-1 rounded-full bg-green-100 font-medium">
+          <div className="bg-gray-50/50 border border-gray-100 p-4 rounded-2xl">
+            <h2 className="text-xl font-bold text-gray-900 tracking-tight flex items-center gap-2">
+              <FiGlobe className="text-primaryBlue text-lg" /> {countryName}
+            </h2>
+            <span className="inline-block text-[10px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-100/60  tracking-wider px-2.5 py-0.5 rounded-md mt-2">
               {visaType}
-            </p>
+            </span>
           </div>
-          <div className="mb-4">
-            <p>
-              <span className="font-semibold lg:text-lg">Processing Time:</span>{" "}
-              {processingTime} Days
-            </p>
-            <p>
-              <span className="font-semibold lg:text-lg">Age Restriction:</span>{" "}
-              {ageRestriction || "None"}
-            </p>
-            <p>
-              <span className="font-semibold lg:text-lg">Fee:</span> ${fee}
-            </p>
-            <p>
-              <span className="font-semibold lg:text-lg">Validity:</span>{" "}
-              {validity}
-            </p>
-            <p>
-              <span className="font-semibold lg:text-lg">
-                Application Method:
-              </span>{" "}
-              {applicationMethod}
-            </p>
-          </div>
-          <div className="mb-4">
-            <h3 className="text-lg font-semibold mb-2">Required Documents:</h3>
-            <ul className="list-disc list-inside">
-              {requiredDocuments.map((doc, index) => (
-                <li key={index}>{doc}</li>
-              ))}
-            </ul>
-          </div>
-          <hr />
-          <div className="my-2">
-            <p>{description}</p>
-          </div>
-          <div className="mb-5 w-fit mx-auto border-2 border-blue-400 rounded-lg p-0.5 hover:scale-105">
-            <button
-              onClick={() => document.getElementById("my_modal_1").showModal()}
-              className="btn btn-sm md:btn-md bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-indigo-500 hover:to-blue-500  text-white"
-            >
-              Apply for the visa
-            </button>
-            <dialog id="my_modal_1" className="modal">
-              <div className="modal-box">
-                <form
-                  onSubmit={handleApply}
-                  className="grid grid-cols-1 lg:grid-cols-2  gap-y-1 gap-x-5"
-                >
-                  <div className="form-control lg:col-span-2">
-                    <label className="label">
-                      <span className="label-text">Email</span>
-                    </label>
-                    <input
-                      type="email"
-                      placeholder="email"
-                      defaultValue={email}
-                      disabled
-                      name="email"
-                      className="input input-bordered cla"
-                      required
-                    />
-                  </div>
-                  <div className="form-control">
-                    <label className="label">
-                      <span className="label-text">First name</span>
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="First name"
-                      name="firstName"
-                      className="input input-bordered"
-                      required
-                    />
-                  </div>
-                  <div className="form-control">
-                    <label className="label">
-                      <span className="label-text">Last name</span>
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="Last name"
-                      name="lastName"
-                      className="input input-bordered"
-                      required
-                    />
-                  </div>
-                  <div className="form-control relative">
-                    <label className="label">
-                      <span className="label-text">Date</span>
-                    </label>
-                    <DatePicker
-                      name="date"
-                      showIcon
-                      icon=""
-                      className="input w-full border border-gray-300"
-                      selected={startDate}
-                      onChange={(date) => setStartDate(date)}
-                    ></DatePicker>
-                    <MdDateRange className="absolute bottom-4 left-2 text-gray-500" />
-                  </div>
-                  <div className="form-control">
-                    <label className="label">
-                      <span className="label-text">Fee</span>
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="Fee"
-                      name="fee"
-                      defaultValue={fee}
-                      disabled
-                      className="input input-bordered"
-                      required
-                    />
-                  </div>
-                  <div className="form-control mt-6 lg:col-span-2">
-                    <button className=" btn bg-gradient-to-r from-blue-500 to-indigo-400 text-white  hover:bg-gradient-to-r hover:from-indigo-400 hover:to-blue-500 hover:scale-105">
-                      Apply
-                    </button>
-                  </div>
-                </form>
-                <div className="modal-action">
-                  <form method="dialog">
-                    <button className="btn">Close</button>
-                  </form>
-                </div>
+        </div>
+
+        {/* Right Column: Information Specification Parameters */}
+        <div className="md:col-span-7 flex flex-col justify-between space-y-6">
+          <div className="space-y-4">
+            <h3 className="text-xs font-bold text-gray-600 te  border-b border-gray-100 pb-2">
+              Technical Specifications
+            </h3>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+              <div className="flex justify-between items-center bg-gray-50/80 p-3 rounded-xl border border-gray-100/40">
+                <span className="flex items-center gap-1.5 text-gray-600 font-medium">
+                  <FiClock /> Processing
+                </span>
+                <span className="font-bold text-gray-700">
+                  {processingTime} Days
+                </span>
               </div>
-            </dialog>
+              <div className="flex justify-between items-center bg-gray-50/80 p-3 rounded-xl border border-gray-100/40">
+                <span className="flex items-center gap-1.5 text-gray-600 font-medium">
+                  <FiAlertCircle /> Age Bar
+                </span>
+                <span className="font-bold text-gray-700">
+                  {ageRestriction ? `${ageRestriction}+` : "None"}
+                </span>
+              </div>
+              <div className="flex justify-between items-center bg-gray-50/80 p-3 rounded-xl border border-gray-100/40">
+                <span className="flex items-center gap-1.5 text-gray-600 font-medium">
+                  <FiCalendar /> Validity
+                </span>
+                <span className="font-bold text-gray-700 truncate max-w-[120px]">
+                  {validity}
+                </span>
+              </div>
+              <div className="flex justify-between items-center bg-gray-50/80 p-3 rounded-xl border border-gray-100/40">
+                <span className="flex items-center gap-1.5 text-gray-600 font-medium">
+                  <FiLayers /> Method
+                </span>
+                <span className="font-bold text-gray-700  tracking-wide">
+                  {applicationMethod}
+                </span>
+              </div>
+            </div>
+
+            <div className="bg-gray-50/80 border border-gray-100/70 p-4 rounded-xl text-xs text-gray-600 leading-relaxed">
+              <span className="text-[10px] font-bold text-gray-600 te  block mb-1.5">
+                Description Node
+              </span>
+              {description}
+            </div>
+
+            {/* Required Documents Protocol */}
+            <div className="space-y-2">
+              <span className="text-[10px] font-bold text-gray-600 te  block">
+                Required Protocol Documents
+              </span>
+              <div className="flex flex-wrap gap-2">
+                {requiredDocuments.map((doc, index) => (
+                  <span
+                    key={index}
+                    className="inline-flex items-center gap-1.5 text-[10px] font-bold text-gray-600 bg-white border border-gray-100 px-3 py-1.5 rounded-xl"
+                  >
+                    <FiCheckCircle className="text-primaryBlue text-xs" /> {doc}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Action Trigger Block */}
+          <div className="pt-4 border-t border-gray-50">
+            <button
+              onClick={() =>
+                document.getElementById("apply_visa_modal").showModal()
+              }
+              className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 text-xs font-bold te text-white bg-gradient-to-r from-primaryBlue to-secondaryIndigo rounded-xl shadow-md active:scale-[0.99] transition-all cursor-pointer"
+            >
+              Initialize Visa Application
+            </button>
           </div>
         </div>
       </div>
+
+      {/* DaisyUI Dialog Overlay Portal */}
+      <dialog
+        id="apply_visa_modal"
+        className="modal backdrop-blur-sm transition-all duration-300"
+      >
+        <div className="modal-box bg-white max-w-xl border border-gray-100 rounded-3xl p-6 sm:p-8 shadow-2xl relative scrollbar-none">
+          <div className="mb-6">
+            <h3 className="text-xl font-bold text-gray-900 tracking-tight">
+              Application Manifest
+            </h3>
+            <p className="text-[10px] font-bold text-gray-600 tracking-wider  mt-0.5">
+              Fill out your credential metrics
+            </p>
+          </div>
+
+          <form onSubmit={handleApply} className="space-y-4">
+            {/* Disabled Node: User Email */}
+            <div className="space-y-1">
+              <label className="text-[10px] font-bold  tracking-wider text-gray-600">
+                Authenticated Email
+              </label>
+              <input
+                type="email"
+                value={email}
+                disabled
+                className="w-full px-4 py-2.5 text-xs font-semibold bg-gray-50 border border-gray-100 rounded-xl text-gray-600 outline-none cursor-not-allowed"
+              />
+            </div>
+
+            {/* Full Name Flex Inputs */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="space-y-1">
+                <label className="text-[10px] font-bold  tracking-wider text-gray-600">
+                  First Name
+                </label>
+                <input
+                  type="text"
+                  name="firstName"
+                  placeholder="John"
+                  className="w-full px-4 py-2.5 text-xs font-semibold bg-white border border-gray-100 rounded-xl outline-none text-gray-800 focus:border-primaryBlue transition-all"
+                  required
+                />
+              </div>
+              <div className="space-y-1">
+                <label className="text-[10px] font-bold  tracking-wider text-gray-600">
+                  Last Name
+                </label>
+                <input
+                  type="text"
+                  name="lastName"
+                  placeholder="Doe"
+                  className="w-full px-4 py-2.5 text-xs font-semibold bg-white border border-gray-100 rounded-xl outline-none text-gray-800 focus:border-primaryBlue transition-all"
+                  required
+                />
+              </div>
+            </div>
+
+            {/* Date and Fee System Rows */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="space-y-1 relative">
+                <label className="text-[10px] font-bold  tracking-wider text-gray-600 block">
+                  Application Date
+                </label>
+                <div className="relative flex items-center">
+                  <DatePicker
+                    name="date"
+                    selected={startDate}
+                    onChange={(date) => setStartDate(date)}
+                    className="w-full pl-10 pr-4 py-2.5 text-xs font-semibold bg-white border border-gray-100 rounded-xl outline-none text-gray-800 focus:border-primaryBlue transition-all"
+                    required
+                  />
+                  <MdDateRange className="absolute left-3.5 text-gray-600 text-sm pointer-events-none" />
+                </div>
+              </div>
+              <div className="space-y-1">
+                <label className="text-[10px] font-bold  tracking-wider text-gray-600">
+                  Required Fee ($)
+                </label>
+                <input
+                  type="text"
+                  value={`$${fee}`}
+                  disabled
+                  className="w-full px-4 py-2.5 text-xs font-bold bg-gray-50 border border-gray-100 rounded-xl text-gray-700 outline-none cursor-not-allowed"
+                />
+              </div>
+            </div>
+
+            {/* Commit Transaction Button */}
+            <button
+              type="submit"
+              className="w-full inline-flex items-center justify-center px-6 py-3 text-xs font-bold  te text-white bg-gradient-to-r from-primaryBlue to-secondaryIndigo rounded-xl shadow-md active:scale-[0.99] transition-all cursor-pointer mt-2"
+            >
+              Submit Application
+            </button>
+          </form>
+
+          {/* Close Action Node Overlay */}
+          <div className="modal-action absolute top-2 right-4">
+            <form method="dialog">
+              <button className="text-gray-600 hover:text-gray-600 font-bold text-xs  te p-2 transition-colors cursor-pointer">
+                ✕
+              </button>
+            </form>
+          </div>
+        </div>
+        <form method="dialog" className="modal-backdrop bg-black/10">
+          <button>close</button>
+        </form>
+      </dialog>
     </div>
   );
 };

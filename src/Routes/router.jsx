@@ -13,11 +13,20 @@ import AllVisas from "../Layouts/AllVisas";
 import VisaDetails from "../Layouts/VisaDetails";
 import MyAddedVisas from "../Layouts/MyAddedVisas";
 import MyVisaApplication from "../Layouts/MyVisaApplication";
+import ScrollToTop from "../Components/shared/ScrollToTop";
+import ReactLenis from "lenis/react";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root></Root>,
+    element: (
+      <>
+        <ScrollToTop />
+        <ReactLenis root options={{ lerp: 0.1, duration: 1.2 }}>
+          <Root></Root>
+        </ReactLenis>
+      </>
+    ),
     children: [
       {
         path: "/",
@@ -33,11 +42,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/all-visas",
-        element: (
-          <PrivateLayouts>
-            <AllVisas />
-          </PrivateLayouts>
-        ),
+        element: <AllVisas />,
       },
       {
         path: "/visa/:id",
@@ -48,7 +53,7 @@ const router = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(
-            `https://assignment-10-server-five-rose.vercel.app/visa/${params.id}`
+            `https://assignment-10-server-five-rose.vercel.app/visa/${params.id}`,
           ),
       },
       {

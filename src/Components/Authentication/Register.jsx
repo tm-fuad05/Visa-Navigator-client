@@ -29,7 +29,7 @@ const Register = () => {
 
     if (!strongPassword.test(password)) {
       setError(
-        "Password must be at least 6 characters and include both uppercase and lowercase letters."
+        "Password must be at least 6 characters and include both  and lowercase letters.",
       );
       return;
     }
