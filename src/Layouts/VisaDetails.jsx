@@ -96,7 +96,7 @@ const VisaDetails = () => {
       </div>
 
       {/* Main Structural Grid Base */}
-      <div className="w-11/12 max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 mt-12">
+      <div className="w-11/12  mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 mt-12">
         {/* Left Column: Visual Identity Banner */}
         <div className="md:col-span-5 space-y-4">
           <figure className="h-64 md:h-80 w-full overflow-hidden rounded-2xl bg-gray-50 border border-gray-100 shadow-sm">
